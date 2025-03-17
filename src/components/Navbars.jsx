@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 
 const Navbars = () => {
@@ -12,6 +13,11 @@ const Navbars = () => {
       <Link to={"Tvshows"}>Tv shows</Link>
     </div>
   );
+=======
+
+const Navbars = () => {
+  return <div>Navbars</div>;
+>>>>>>> de19dcb2e690f24fd2a29e3b2ea1b19c718a8b1c
 };
 
 export default Navbars;

@@ -7,6 +7,7 @@ import TopRated from "./Movie-Types/TopRated";
 import Movies from "./Movie-Types/Movies";
 import UpcomingMovies from "./Movie-Types/UpcomingMovies";
 import TvShows from "./Movie-Types/TvShows";
+//Imports needed for React router to be able to use the components
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import axios from "axios";
@@ -95,7 +96,12 @@ const App = () => {
 
     <div className="grid grid-cols-1 gap-10">
       <Searchbar current_place={location} />
+
       <Navbars />
+      <h1 className="text-white font-mono text-center text-[2rem]">
+        {location}
+      </h1>
+
       <div className="grid grid-cols-4 justify-items-center gap-15 ">
         <Routes>
           //*The routes

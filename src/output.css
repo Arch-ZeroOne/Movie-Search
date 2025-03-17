@@ -266,6 +266,9 @@
   .gap-\[10rem\] {
     gap: 10rem;
   }
+  .self-center {
+    align-self: center;
+  }
   .rounded-lg {
     border-radius: var(--radius-lg);
   }
@@ -294,11 +297,17 @@
   .font-\[Jetbrains_Mono\] {
     font-family: Jetbrains Mono;
   }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
   .text-\[1\.2rem\] {
     font-size: 1.2rem;
   }
   .text-\[1\.3rem\] {
     font-size: 1.3rem;
+  }
+  .text-\[2rem\] {
+    font-size: 2rem;
   }
   .text-white {
     color: var(--color-white);
@@ -319,36 +328,6 @@
       @media (hover: hover) {
         background-color: var(--color-blue-600);
       }
-    }
-  }
-  .min-\[320px\]\:grid-cols-1 {
-    @media (width >= 320px) {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-  }
-  .sm\:grid {
-    @media (width >= 40rem) {
-      display: grid;
-    }
-  }
-  .sm\:w-30 {
-    @media (width >= 40rem) {
-      width: calc(var(--spacing) * 30);
-    }
-  }
-  .sm\:grid-cols-1 {
-    @media (width >= 40rem) {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-  }
-  .sm\:grid-cols-2 {
-    @media (width >= 40rem) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  .sm\:flex-col {
-    @media (width >= 40rem) {
-      flex-direction: column;
     }
   }
 }

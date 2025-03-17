@@ -1,3 +1,5 @@
+//* Solved the issue of not being able to useLocation in the react router by transfering the <BrowserRouter /> to the outermost component which is in this case is 'main.jsx';
+//* Got the location of the current path using the useLocation() from the react router library
 import React from "react";
 import Searchbar from "./Searchbar";
 import { useEffect, useState } from "react";
@@ -5,7 +7,7 @@ import TopRated from "./Movie-Types/TopRated";
 import Movies from "./Movie-Types/Movies";
 import UpcomingMovies from "./Movie-Types/UpcomingMovies";
 import TvShows from "./Movie-Types/TvShows";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import axios from "axios";
 import Navbars from "./Navbars";
@@ -14,7 +16,20 @@ const App = () => {
   const [topRated, setTopRated] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [tvShows, setTvShows] = useState([]);
+  const [location, setLocation] = useState("");
+  const browserPath = useLocation();
 
+  useEffect(() => {
+    if (browserPath.pathname === "/") {
+      setLocation("Home");
+    } else if (browserPath.pathname === "/Movies") {
+      setLocation("Movies");
+    } else if (browserPath.pathname === "/Upcoming") {
+      setLocation("Upcoming");
+    } else if (browserPath.pathname === "/Tvshows") {
+      setLocation("TV Shows");
+    }
+  }, [browserPath]);
   useEffect(() => {
     axios
       .get("https://api.themoviedb.org/3/discover/movie", {
@@ -28,6 +43,7 @@ const App = () => {
         setMovies(response.data.results);
       });
   }, []);
+
   useEffect(() => {
     axios
       .get(
@@ -75,46 +91,47 @@ const App = () => {
   });
 
   return (
-    <BrowserRouter>
-      <div className="grid grid-cols-1 gap-10">
-        <Searchbar />
-        <Navbars />
-        <div className="grid grid-cols-4">
-          <Routes>
-            <Route
-              path="/"
-              element={movies.map((movie) => (
-                <Movies poster_path={movie.poster_path} title={movie.title} />
-              ))}
-            />
-            <Route
-              path="Toprated"
-              element={topRated.map((topRated) => (
-                <TopRated
-                  poster_path={topRated.poster_path}
-                  title={topRated.title}
-                />
-              ))}
-            />
-            <Route
-              path="Upcoming"
-              element={upcoming.map((coming) => (
-                <UpcomingMovies
-                  poster_path={coming.poster_path}
-                  title={coming.title}
-                />
-              ))}
-            />
-            <Route
-              path="Tvshows"
-              element={tvShows.map((show) => (
-                <TvShows poster_path={show.poster_path} name={show.name} />
-              ))}
-            />
-          </Routes>
-        </div>
+    //*Parent component when doing routing
+
+    <div className="grid grid-cols-1 gap-10">
+      <Searchbar current_place={location} />
+      <Navbars />
+      <div className="grid grid-cols-4 justify-items-center gap-15 ">
+        <Routes>
+          //*The routes
+          <Route
+            path="/"
+            element={topRated.map((topRated) => (
+              <TopRated
+                poster_path={topRated.poster_path}
+                title={topRated.title}
+              />
+            ))}
+          />
+          <Route
+            path="Movies"
+            element={movies.map((movie) => (
+              <Movies poster_path={movie.poster_path} title={movie.title} />
+            ))}
+          />
+          <Route
+            path="Upcoming"
+            element={upcoming.map((coming) => (
+              <UpcomingMovies
+                poster_path={coming.poster_path}
+                title={coming.title}
+              />
+            ))}
+          />
+          <Route
+            path="Tvshows"
+            element={tvShows.map((show) => (
+              <TvShows poster_path={show.poster_path} name={show.name} />
+            ))}
+          />
+        </Routes>
       </div>
-    </BrowserRouter>
+    </div>
   );
 };
 

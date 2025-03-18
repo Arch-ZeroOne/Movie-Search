@@ -31,6 +31,7 @@ const App = () => {
       setLocation("TV Shows");
     }
   }, [browserPath]);
+
   useEffect(() => {
     axios
       .get("https://api.themoviedb.org/3/discover/movie", {

@@ -3,14 +3,14 @@ import React from "react";
 function Movies({ poster_path, title }) {
   return (
     <div className=" text-white font-[Jetbrains_Mono] p-3 text-center">
-      <div className="w-70 h-100 flex flex-col items-center gap-5">
+      <div className="h-100 flex flex-col items-center gap-5">
         {poster_path ? (
           <img
             src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
             className="w-auto h-[100%]"
           />
         ) : (
-          <img src="public/no_poster/poster/error.jpg"></img>
+          <img src="public/no_poster/poster_error.jpg" alt="poster_error"></img>
         )}
         <h2>{title}</h2>
       </div>

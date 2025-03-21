@@ -7,6 +7,7 @@ import TopRated from "./Movie-Types/TopRated";
 import Movies from "./Movie-Types/Movies";
 import UpcomingMovies from "./Movie-Types/UpcomingMovies";
 import TvShows from "./Movie-Types/TvShows";
+
 //*Imports needed for React router to be able to use the components
 import { Routes, Route, useLocation } from "react-router-dom";
 
@@ -113,18 +114,17 @@ const App = () => {
   return (
     //*Parent component when doing routing
 
-    <div className="grid grid-cols-1 gap-10">
+    <div className="grid grid-cols-1 gap-10 ">
       <MovieContext.Provider value={{ newMovie, setNewMovie }}>
         <TopRatedContext.Provider value={{ topRated, setTopRated }}>
           <UpcomingContext.Provider value={{ upcoming, setUpcoming }}>
             <TvShowsContext.Provider value={{ tvShows, setTvShows }}>
               <Searchbar current_place={location} onChange={setResult} />
-
               <Navbars />
               <h1 className="text-white font-mono text-center text-[2rem]">
                 {location}
               </h1>
-              <div className="grid grid-cols-5 justify-items-center gap-5">
+              <div className="grid grid-cols-5 justify-items-center gap-5 cards w-[100%]">
                 {/*Parent for the routes */}
                 <Routes>
                   //*The routes

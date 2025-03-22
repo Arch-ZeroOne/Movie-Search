@@ -7,6 +7,8 @@ import {
 } from "./App";
 import axios from "axios";
 const Searchbar = ({ current_place }) => {
+  //Used the context from the states in the app
+  //When the context is changed here it automatically affects the context in the main file in short: It updates
   const { newMovie, setNewMovie } = useContext(MovieContext);
   const { topRated, setTopRated } = useContext(TopRatedContext);
   const { upcoming, setUpcoming } = useContext(UpcomingContext);

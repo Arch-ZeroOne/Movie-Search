@@ -206,20 +206,8 @@
   .h-\[100\%\] {
     height: 100%;
   }
-  .w-50 {
-    width: calc(var(--spacing) * 50);
-  }
-  .w-70 {
-    width: calc(var(--spacing) * 70);
-  }
-  .w-\[0\%\] {
-    width: 0%;
-  }
   .w-\[80\%\] {
     width: 80%;
-  }
-  .w-\[90\%\] {
-    width: 90%;
   }
   .w-\[100\%\] {
     width: 100%;
@@ -242,9 +230,6 @@
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-  .grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
   .grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
@@ -257,9 +242,6 @@
   .justify-around {
     justify-content: space-around;
   }
-  .justify-center {
-    justify-content: center;
-  }
   .justify-items-center {
     justify-items: center;
   }
@@ -268,9 +250,6 @@
   }
   .gap-10 {
     gap: calc(var(--spacing) * 10);
-  }
-  .gap-\[10rem\] {
-    gap: 10rem;
   }
   .rounded-lg {
     border-radius: var(--radius-lg);
@@ -331,6 +310,21 @@
       @media (hover: hover) {
         background-color: var(--color-blue-600);
       }
+    }
+  }
+  .sm\:grid {
+    @media (width >= 40rem) {
+      display: grid;
+    }
+  }
+  .sm\:grid-cols-1 {
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }
+  .sm\:grid-cols-2 {
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 }

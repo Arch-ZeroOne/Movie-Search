@@ -7,6 +7,12 @@ import TopRated from "./Movie-Types/TopRated";
 import Movies from "./Movie-Types/Movies";
 import UpcomingMovies from "./Movie-Types/UpcomingMovies";
 import TvShows from "./Movie-Types/TvShows";
+import {
+  getMovies,
+  getTopRated,
+  getTvShows,
+  getUpcoming,
+} from "./Api/FetchRequest";
 
 //*Imports needed for React router to be able to use the components
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -20,7 +26,7 @@ export const TvShowsContext = React.createContext();
 import axios from "axios";
 import Navbars from "./Navbars";
 const App = () => {
-  const [newMovie, setNewMovie] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [tvShows, setTvShows] = useState([]);
@@ -41,55 +47,33 @@ const App = () => {
   }, [browserPath]);
 
   //* Fetching movies
-  useEffect(() => {
-    axios
-      .get("https://api.themoviedb.org/3/discover/movie", {
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMGU4MTBlOTAwMDc0ZGI2ODBmNzJjZWNjODI1MTdhMCIsIm5iZiI6MTc0MjA1MDMxOS4xNSwic3ViIjoiNjdkNTk0MGY3OTBkNzg2MzNhMDEzN2U0Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.nKNQgx1xor8E42nVIUGUAfLexUCaCUK13T83LV6oQdY",
-        },
-      })
 
-      .then((response) => {
-        setNewMovie(response.data.results);
-      });
+  useEffect(() => {
+    const movie = async () => {
+      const movies = await getMovies();
+
+      setMovies(movies.results);
+    };
+    movie();
   }, []);
 
   //*Fetching the the top rate movies
   useEffect(() => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
-        {
-          headers: {
-            accept: "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMGU4MTBlOTAwMDc0ZGI2ODBmNzJjZWNjODI1MTdhMCIsIm5iZiI6MTc0MjA1MDMxOS4xNSwic3ViIjoiNjdkNTk0MGY3OTBkNzg2MzNhMDEzN2U0Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.nKNQgx1xor8E42nVIUGUAfLexUCaCUK13T83LV6oQdY",
-          },
-        }
-      )
-      .then((response) => {
-        setTopRated(response.data.results);
-      });
+    const topRated = async () => {
+      const topRate = await getTopRated();
+
+      setTopRated(topRate.results);
+    };
+    topRated();
   }, []);
 
   //* Fetching the upcoming movies
   useEffect(() => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
-        {
-          headers: {
-            accept: "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMGU4MTBlOTAwMDc0ZGI2ODBmNzJjZWNjODI1MTdhMCIsIm5iZiI6MTc0MjA1MDMxOS4xNSwic3ViIjoiNjdkNTk0MGY3OTBkNzg2MzNhMDEzN2U0Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.nKNQgx1xor8E42nVIUGUAfLexUCaCUK13T83LV6oQdY",
-          },
-        }
-      )
-      .then((response) => {
-        setUpcoming(response.data.results);
-      });
+    const upcoming = async () => {
+      const upcoming = await getUpcoming();
+      setUpcoming(upcoming.results);
+    };
+    upcoming();
   }, []);
 
   const setResult = (event) => {
@@ -98,24 +82,18 @@ const App = () => {
 
   //* Fetching the tv shows
   useEffect(() => {
-    axios
-      .get("https://api.themoviedb.org/3/discover/tv", {
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMGU4MTBlOTAwMDc0ZGI2ODBmNzJjZWNjODI1MTdhMCIsIm5iZiI6MTc0MjA1MDMxOS4xNSwic3ViIjoiNjdkNTk0MGY3OTBkNzg2MzNhMDEzN2U0Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.nKNQgx1xor8E42nVIUGUAfLexUCaCUK13T83LV6oQdY",
-        },
-      })
-      .then((response) => {
-        setTvShows(response.data.results);
-      });
+    const tv = async () => {
+      const tvshows = await getTvShows();
+      setTvShows(tvshows.results);
+    };
+    tv();
   });
 
   return (
     //*Parent component when doing routing
 
     <div className="grid grid-cols-1 gap-10 ">
-      <MovieContext.Provider value={{ newMovie, setNewMovie }}>
+      <MovieContext.Provider value={{ movies, setMovies }}>
         <TopRatedContext.Provider value={{ topRated, setTopRated }}>
           <UpcomingContext.Provider value={{ upcoming, setUpcoming }}>
             <TvShowsContext.Provider value={{ tvShows, setTvShows }}>
@@ -139,7 +117,7 @@ const App = () => {
                   />
                   <Route
                     path="Movies"
-                    element={newMovie.map((movie) => (
+                    element={movies.map((movie) => (
                       <Movies
                         poster_path={movie.poster_path}
                         title={movie.title}

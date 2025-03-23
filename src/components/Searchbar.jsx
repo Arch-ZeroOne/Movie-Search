@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import {
   MovieContext,
   TopRatedContext,
@@ -9,7 +9,7 @@ import axios from "axios";
 const Searchbar = ({ current_place }) => {
   //Used the context from the states in the app
   //When the context is changed here it automatically affects the context in the main file in short: It updates
-  const { newMovie, setNewMovie } = useContext(MovieContext);
+  const { movies, setMovies } = useContext(MovieContext);
   const { topRated, setTopRated } = useContext(TopRatedContext);
   const { upcoming, setUpcoming } = useContext(UpcomingContext);
   const { tvShows, setTvShows } = useContext(TvShowsContext);
@@ -53,7 +53,7 @@ const Searchbar = ({ current_place }) => {
             setTopRated(response.data.results);
             break;
           case "Movies":
-            setNewMovie(response.data.results);
+            setMovies(response.data.results);
             break;
           case "Upcoming":
             setUpcoming(response.data.results);

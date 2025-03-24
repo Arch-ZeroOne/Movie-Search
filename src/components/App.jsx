@@ -13,7 +13,7 @@ import {
   getTvShows,
   getUpcoming,
 } from "./Api/FetchRequest";
-
+import Navbars from "./Navbars";
 //*Imports needed for React router to be able to use the components
 import { Routes, Route, useLocation } from "react-router-dom";
 
@@ -23,8 +23,6 @@ export const TopRatedContext = React.createContext();
 export const UpcomingContext = React.createContext();
 export const TvShowsContext = React.createContext();
 
-import axios from "axios";
-import Navbars from "./Navbars";
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [topRated, setTopRated] = useState([]);
@@ -47,11 +45,9 @@ const App = () => {
   }, [browserPath]);
 
   //* Fetching movies
-
   useEffect(() => {
     const movie = async () => {
       const movies = await getMovies();
-
       setMovies(movies.results);
     };
     movie();
@@ -90,8 +86,6 @@ const App = () => {
   });
 
   return (
-    //*Parent component when doing routing
-
     <div className="grid grid-cols-1 gap-10 ">
       <MovieContext.Provider value={{ movies, setMovies }}>
         <TopRatedContext.Provider value={{ topRated, setTopRated }}>
@@ -104,6 +98,7 @@ const App = () => {
               </h1>
               <div className="grid grid-cols-5 justify-items-center gap-5 cards w-[100%]">
                 {/*Parent for the routes */}
+
                 <Routes>
                   //*The routes
                   <Route

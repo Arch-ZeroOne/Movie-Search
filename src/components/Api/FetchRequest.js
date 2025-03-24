@@ -3,8 +3,11 @@ const accessToken =
 
 export async function getMovies() {
   const options = {
-    accept: "application/json",
-    Authorization: accessToken,
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
   };
 
   const request = await fetch(
@@ -20,8 +23,11 @@ export async function getMovies() {
 
 export async function getTopRated() {
   const options = {
-    accept: "application/json",
-    Authorization: accessToken,
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
   };
 
   const request = await fetch(
@@ -37,8 +43,11 @@ export async function getTopRated() {
 
 export async function getUpcoming() {
   const options = {
-    accept: "application/json",
-    Authorization: accessToken,
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
   };
 
   const request = await fetch(
@@ -54,8 +63,11 @@ export async function getUpcoming() {
 
 export async function getTvShows() {
   const options = {
-    accept: "application/json",
-    Authorization: accessToken,
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
   };
 
   const request = await fetch(

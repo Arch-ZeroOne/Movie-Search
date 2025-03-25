@@ -86,7 +86,7 @@ const App = () => {
   });
 
   return (
-    <div className="grid grid-cols-1 gap-10 ">
+    <div className="grid grid-cols-1 gap-10 max-sm:max-md:text-sm ">
       <MovieContext.Provider value={{ movies, setMovies }}>
         <TopRatedContext.Provider value={{ topRated, setTopRated }}>
           <UpcomingContext.Provider value={{ upcoming, setUpcoming }}>
@@ -96,11 +96,8 @@ const App = () => {
               <h1 className="text-white font-mono text-center text-[2rem]">
                 {location}
               </h1>
-              <div className="grid grid-cols-5 justify-items-center gap-5 cards w-[100%]">
-                {/*Parent for the routes */}
-
+              <div className="grid grid-cols-5 justify-items-center gap-5 cards w-[100%] max-sm:grid-cols-2  max-sm:gap-[2rem]  sm:max-md:grid-cols-3  xl:grid:gap-10">
                 <Routes>
-                  //*The routes
                   <Route
                     path="/"
                     element={topRated.map((topRated) => (

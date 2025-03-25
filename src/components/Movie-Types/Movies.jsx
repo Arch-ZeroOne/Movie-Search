@@ -2,10 +2,7 @@ import React from "react";
 
 function Movies({ poster_path, title }) {
   return (
-    <div
-      className=" text-white font-[Jetbrains_Mono] p-3 text-center"
-      onClick={handleMovieRoute}
-    >
+    <div className=" text-white font-[Jetbrains_Mono] p-3 text-center">
       <div className="h-100 flex flex-col items-center gap-5">
         {poster_path ? (
           <img
@@ -20,7 +17,5 @@ function Movies({ poster_path, title }) {
     </div>
   );
 }
-
-function handleMovieRoute({ id }) {}
 
 export default Movies;

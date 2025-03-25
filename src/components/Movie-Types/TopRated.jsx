@@ -2,7 +2,7 @@ import React from "react";
 
 function TopRated({ poster_path, title }) {
   return (
-    <div className=" text-white font-[Jetbrains_Mono] p-3 text-center">
+    <div className=" text-white font-[Jetbrains_Mono] p-3 text-center max-sm:text-[13px] ">
       <div className=" h-100 flex flex-col items-center gap-5 ">
         {poster_path ? (
           <img

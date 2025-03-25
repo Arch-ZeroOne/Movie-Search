@@ -63,6 +63,8 @@ const Searchbar = ({ current_place }) => {
             break;
         }
       });
+
+    handleInputValue(event);
   };
 
   return (
@@ -71,6 +73,7 @@ const Searchbar = ({ current_place }) => {
         type="text"
         placeholder={`Search in ${current_place}`}
         onChange={handleChange}
+        value={event.target.value}
         className="bg-[#1F2937] w-[80%] mr-auto ml-auto p-3 rounded-lg outline-none text-[1.3rem]"
       />
     </div>

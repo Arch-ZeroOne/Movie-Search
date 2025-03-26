@@ -17,7 +17,6 @@ import Navbars from "./Navbars";
 //*Imports needed for React router to be able to use the components
 import { Routes, Route, useLocation } from "react-router-dom";
 
-//* The value of this would be the movies state which contains the movies
 export const MovieContext = React.createContext();
 export const TopRatedContext = React.createContext();
 export const UpcomingContext = React.createContext();

@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   MovieContext,
   TopRatedContext,
   UpcomingContext,
   TvShowsContext,
+  InputValueContext,
 } from "./App";
 import axios from "axios";
+export const ValueContext = React.createContext();
 const Searchbar = ({ current_place }) => {
   //Used the context from the states in the app
   //When the context is changed here it automatically affects the context in the main file in short: It updates
@@ -13,6 +15,7 @@ const Searchbar = ({ current_place }) => {
   const { topRated, setTopRated } = useContext(TopRatedContext);
   const { upcoming, setUpcoming } = useContext(UpcomingContext);
   const { tvShows, setTvShows } = useContext(TvShowsContext);
+  const { inputValue, setInputValue } = useContext(InputValueContext);
 
   const handleChange = (event) => {
     const value = String(event.target.value);
@@ -37,6 +40,7 @@ const Searchbar = ({ current_place }) => {
           url = "https://api.themoviedb.org/3/discover/tv";
           break;
       }
+      setInputValue(value);
     }
 
     axios
@@ -73,7 +77,6 @@ const Searchbar = ({ current_place }) => {
         type="text"
         placeholder={`Search in ${current_place}`}
         onChange={handleChange}
-        value={event.target.value}
         className="bg-[#1F2937] w-[80%] mr-auto ml-auto p-3 rounded-lg outline-none text-[1.3rem]"
       />
     </div>

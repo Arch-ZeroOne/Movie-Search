@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Navbars = () => {
   return (
-    <div className="text-white list-none font-[Jetbrains_Mono] flex items-center justify-around gap-auto text-[1.2rem] cursor-pointer max-sm:text-[2rempx] max-sm:flex max-sm:flex-col ">
+    <div className="text-white list-none font-[Jetbrains_Mono] flex items-center justify-around gap-auto text-[1.2rem] cursor-pointer max-sm:text-[1rem] max-sm:flex max-sm:flex-col max-sm:gap-[13px] ">
       <Link to={"/"} className="max-sm:w-[100%] text-center">
         <li className="hover:bg-blue-600 rounded-xl p-2 w-[100%]">Top rated</li>
       </Link>

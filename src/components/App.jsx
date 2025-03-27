@@ -39,10 +39,13 @@ const App = () => {
       setInputValue("");
     } else if (browserPath.pathname === "/Movies") {
       setLocation("Movies");
+      setInputValue("");
     } else if (browserPath.pathname === "/Upcoming") {
       setLocation("Upcoming");
+      setInputValue("");
     } else if (browserPath.pathname === "/Tvshows") {
       setLocation("TV Shows");
+      setInputValue("");
     }
   }, [browserPath]);
 

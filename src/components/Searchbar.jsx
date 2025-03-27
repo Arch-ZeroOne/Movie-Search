@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   MovieContext,
   TopRatedContext,
@@ -18,12 +18,13 @@ const Searchbar = ({ current_place }) => {
   const { inputValue, setInputValue } = useContext(InputValueContext);
 
   const handleChange = (event) => {
-    const value = String(event.target.value);
     let url = "";
 
-    if (value !== "") {
+    if (event.target.value !== "") {
+      console.log("Has value");
       url = `https://api.themoviedb.org/3/search/movie?query=${event.target.value}&include_adult=false&language=en-US&page=1`;
     } else {
+      //* There is a delay in here when the value is cleared
       switch (current_place) {
         case "Home":
           url =
@@ -40,7 +41,6 @@ const Searchbar = ({ current_place }) => {
           url = "https://api.themoviedb.org/3/discover/tv";
           break;
       }
-      setInputValue(value);
     }
 
     axios
@@ -68,7 +68,7 @@ const Searchbar = ({ current_place }) => {
         }
       });
 
-    handleInputValue(event);
+    setInputValue(event.target.value);
   };
 
   return (
@@ -77,6 +77,7 @@ const Searchbar = ({ current_place }) => {
         type="text"
         placeholder={`Search in ${current_place}`}
         onChange={handleChange}
+        value={inputValue}
         className="bg-[#1F2937] w-[80%] mr-auto ml-auto p-3 rounded-lg outline-none text-[1.3rem]"
       />
     </div>

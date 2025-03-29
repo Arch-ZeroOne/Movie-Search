@@ -55,6 +55,7 @@ const Searchbar = ({ current_place }) => {
         },
       })
       .then((response) => {
+        console.log(response);
         switch (current_place) {
           case "Home":
             setTopRated(response.data.results);
@@ -65,7 +66,7 @@ const Searchbar = ({ current_place }) => {
           case "Upcoming":
             setUpcoming(response.data.results);
             break;
-          case "TV Shows":
+          default:
             setTvShows(response.data.results);
             break;
         }

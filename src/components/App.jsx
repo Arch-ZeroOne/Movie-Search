@@ -82,7 +82,7 @@ const App = () => {
       setTvShows(tvshows.results);
     };
     tv();
-  });
+  }, []);
 
   return (
     <div className="flex flex-col items-center gap-5 ">

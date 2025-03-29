@@ -15,7 +15,7 @@ import {
 } from "./Api/FetchRequest";
 import Navbars from "./Navbars";
 //*Imports needed for React router to be able to use the components
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
 export const MovieContext = React.createContext();
 export const TopRatedContext = React.createContext();
@@ -29,6 +29,7 @@ const App = () => {
   const [tvShows, setTvShows] = useState([]);
   const [location, setLocation] = useState("");
   const browserPath = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     //* If the path change it sets the location state to the name of the url path
@@ -69,6 +70,20 @@ const App = () => {
       setUpcoming(upcoming.results);
     };
     upcoming();
+  }, []);
+
+  useEffect(() => {
+    const browser_path = {
+      path: browserPath.pathname,
+    };
+    const arrayHolder = [];
+    arrayHolder[0] = browser_path;
+    localStorage.setItem("Location", JSON.stringify(arrayHolder));
+  }, [location]);
+
+  useEffect(() => {
+    const item = localStorage.getItem("Location");
+    navigate(item.pathname);
   }, []);
 
   const setResult = (event) => {

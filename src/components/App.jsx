@@ -1,12 +1,11 @@
 //* Solved the issue of not being able to useLocation in the react router by transfering the <BrowserRouter /> to the outermost component which is in this case is 'main.jsx';
 //* Got the location of the current path using the useLocation() from the react router library
 import Searchbar from "./Searchbar";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopRated from "./Movie-Types/TopRated";
 import Movies from "./Movie-Types/Movies";
 import UpcomingMovies from "./Movie-Types/UpcomingMovies";
 import TvShows from "./Movie-Types/TvShows";
-import { useFunction } from "./Searchbar";
 
 import {
   getMovies,
@@ -30,11 +29,6 @@ const App = () => {
   const [tvShows, setTvShows] = useState([]);
   const [location, setLocation] = useState("");
   const browserPath = useLocation();
-  const getFunction = useFunction();
-
-  useEffect(() => {
-    console.log(getFunction);
-  }, []);
 
   useEffect(() => {
     //* If the path change it sets the location state to the name of the url path
@@ -91,7 +85,7 @@ const App = () => {
   });
 
   return (
-    <div className="grid grid-cols-1 gap-10 max-sm:max-md:text-sm ">
+    <div className="flex flex-col items-center gap-5 ">
       <MovieContext.Provider value={{ movies, setMovies }}>
         <TopRatedContext.Provider value={{ topRated, setTopRated }}>
           <UpcomingContext.Provider value={{ upcoming, setUpcoming }}>
@@ -99,10 +93,10 @@ const App = () => {
               <Searchbar current_place={location} onChange={setResult} />
 
               <Navbars />
-              <h1 className="text-white font-mono text-center text-[1.5rem] ">
+              <h1 className="text-white font-mono  text-lg md:text-left">
                 {location}
               </h1>
-              <div className="grid grid-cols-5 justify-items-center gap-5 cards w-[100%] max-sm:grid-cols-2  max-sm:gap-[2rem]  sm:max-md:grid-cols-3  text-sm">
+              <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5">
                 <Routes>
                   <Route
                     path="/"

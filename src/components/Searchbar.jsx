@@ -7,7 +7,7 @@ import {
 } from "./App";
 import axios from "axios";
 export const ValueContext = React.createContext();
-export const HandleChangeContext = React.createContext();
+
 const Searchbar = ({ current_place }) => {
   //Used the context from the states in the app
   //When the context is changed here it automatically affects the context in the main file in short: It updates
@@ -69,21 +69,15 @@ const Searchbar = ({ current_place }) => {
   };
 
   return (
-    <HandleChangeContext.Provider value={handleChange}>
-      <div className="text-white w-[100%] flex items-center mt-10">
-        <input
-          type="text"
-          placeholder={`Search in ${current_place}`}
-          onChange={handleChange}
-          className="bg-[#1F2937] w-[80%] mr-auto ml-auto p-3 rounded-lg outline-none text-[1.3rem]"
-        />
-      </div>
-    </HandleChangeContext.Provider>
+    <div className="w-[80%] text-white p-5 text-sm">
+      <input
+        type="text"
+        placeholder={`Search in ${current_place}`}
+        onChange={handleChange}
+        className="bg-[#1F2937] mr-auto ml-auto font-mono w-full p-3 rounded text-sm "
+      />
+    </div>
   );
 };
-
-export function useFunction() {
-  return useContext(HandleChangeContext);
-}
 
 export default Searchbar;

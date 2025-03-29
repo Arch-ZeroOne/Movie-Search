@@ -19,8 +19,14 @@ const Searchbar = ({ current_place }) => {
   const handleChange = (event) => {
     let url = "";
     if (event.target.value !== "") {
-      console.log("Has value");
-      url = `https://api.themoviedb.org/3/search/movie?query=${event.target.value}&include_adult=false&language=en-US&page=1`;
+      switch (current_place) {
+        case "TV Shows":
+          url = `https://api.themoviedb.org/3/search/tv?query=${event.target.value}&include_adult=false&language=en-US&page=1`;
+          break;
+        default:
+          url = `https://api.themoviedb.org/3/search/movie?query=${event.target.value}&include_adult=false&language=en-US&page=1`;
+          break;
+      }
     } else {
       switch (current_place) {
         case "Home":
@@ -64,8 +70,6 @@ const Searchbar = ({ current_place }) => {
             break;
         }
       });
-
-    setInputValue(event.target.value);
   };
 
   return (

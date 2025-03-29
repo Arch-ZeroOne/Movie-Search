@@ -15,7 +15,7 @@ import {
 } from "./Api/FetchRequest";
 import Navbars from "./Navbars";
 //*Imports needed for React router to be able to use the components
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 export const MovieContext = React.createContext();
 export const TopRatedContext = React.createContext();
@@ -29,7 +29,6 @@ const App = () => {
   const [tvShows, setTvShows] = useState([]);
   const [location, setLocation] = useState("");
   const browserPath = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     //* If the path change it sets the location state to the name of the url path
@@ -72,20 +71,6 @@ const App = () => {
     upcoming();
   }, []);
 
-  useEffect(() => {
-    const browser_path = {
-      path: browserPath.pathname,
-    };
-    const arrayHolder = [];
-    arrayHolder[0] = browser_path;
-    localStorage.setItem("Location", JSON.stringify(arrayHolder));
-  }, [location]);
-
-  useEffect(() => {
-    const item = localStorage.getItem("Location");
-    navigate(item.pathname);
-  }, []);
-
   const setResult = (event) => {
     handleSearchQuery(event.target.value);
   };
@@ -111,7 +96,7 @@ const App = () => {
               <h1 className="text-white font-mono  text-lg md:text-left">
                 {location}
               </h1>
-              <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5">
+              <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 xl:gap-1">
                 <Routes>
                   <Route
                     path="/"

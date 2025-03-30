@@ -11,10 +11,10 @@ export const ValueContext = React.createContext();
 const Searchbar = ({ current_place }) => {
   //Used the context from the states in the app
   //When the context is changed here it automatically affects the context in the main file in short: It updates
-  const { movies, setMovies } = useContext(MovieContext);
-  const { topRated, setTopRated } = useContext(TopRatedContext);
-  const { upcoming, setUpcoming } = useContext(UpcomingContext);
-  const { tvShows, setTvShows } = useContext(TvShowsContext);
+  const { setMovies } = useContext(MovieContext);
+  const { setTopRated } = useContext(TopRatedContext);
+  const { setUpcoming } = useContext(UpcomingContext);
+  const { setTvShows } = useContext(TvShowsContext);
 
   const handleChange = (event) => {
     let url = "";
@@ -79,7 +79,7 @@ const Searchbar = ({ current_place }) => {
         type="text"
         placeholder={`Search in ${current_place}`}
         onChange={handleChange}
-        className="bg-[#1F2937] mr-auto ml-auto font-mono w-full p-3 rounded text-sm "
+        className="bg-[#1F2937] mr-auto ml-auto font-mono w-full p-3 rounded-lg text-sm max-sm:text-center"
       />
     </div>
   );

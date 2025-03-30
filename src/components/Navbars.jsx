@@ -6,7 +6,7 @@ const Navbars = () => {
   const location = useLocation();
 
   return (
-    <div className="text-white list-none font-mono text-sm flex-col  flex items-center justify-around md:max-lg:flex-row md:max-lg:text-md md:max-lg:gap-auto lg:flex-row gap-auto w-[80%] sm:flex-row">
+    <div className="text-white list-none font-mono text-sm flex-col  flex items-center justify-around md:max-lg:flex-row md:max-lg:text-md md:max-lg:gap-auto lg:flex-row gap-auto w-[80%] sm:flex-row gap-3">
       <Link to={"/"} className="max-sm:w-full text-center">
         {location.pathname === "/" ? (
           <li className="hover:bg-blue-600 rounded-xl p-2 bg-blue-600">

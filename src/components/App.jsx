@@ -86,10 +86,10 @@ const App = () => {
 
   return (
     <div className="flex flex-col items-center gap-5 ">
-      <MovieContext.Provider value={{ movies, setMovies }}>
-        <TopRatedContext.Provider value={{ topRated, setTopRated }}>
-          <UpcomingContext.Provider value={{ upcoming, setUpcoming }}>
-            <TvShowsContext.Provider value={{ tvShows, setTvShows }}>
+      <MovieContext.Provider value={{ setMovies }}>
+        <TopRatedContext.Provider value={{ setTopRated }}>
+          <UpcomingContext.Provider value={{ setUpcoming }}>
+            <TvShowsContext.Provider value={{ setTvShows }}>
               <Searchbar current_place={location} onChange={setResult} />
 
               <Navbars />

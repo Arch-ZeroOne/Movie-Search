@@ -15,7 +15,13 @@ import {
 } from "./Api/FetchRequest";
 import Navbars from "./Navbars";
 //*Imports needed for React router to be able to use the components
-import { Routes, Route, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 
 export const MovieContext = React.createContext();
 export const TopRatedContext = React.createContext();
@@ -28,7 +34,9 @@ const App = () => {
   const [upcoming, setUpcoming] = useState([]);
   const [tvShows, setTvShows] = useState([]);
   const [location, setLocation] = useState("");
+  const [route, setRoute] = useState("");
   const browserPath = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     //* If the path change it sets the location state to the name of the url path
@@ -84,6 +92,19 @@ const App = () => {
     tv();
   }, []);
 
+  //*Prevent overwriting
+  useEffect(() => {
+    const location = JSON.parse(localStorage.getItem("Route"));
+    const current = location[0].route;
+    navigate(current);
+  }, []);
+
+  //* Saving sessions to localstorage
+  useEffect(() => {
+    const route = [{ route: browserPath.pathname }];
+    localStorage.setItem("Route", JSON.stringify(route));
+  }, [location]);
+
   return (
     <div className="flex flex-col items-center gap-5 ">
       <MovieContext.Provider value={{ setMovies }}>
@@ -91,7 +112,6 @@ const App = () => {
           <UpcomingContext.Provider value={{ setUpcoming }}>
             <TvShowsContext.Provider value={{ setTvShows }}>
               <Searchbar current_place={location} onChange={setResult} />
-
               <Navbars />
               <h1 className="text-white font-mono  text-lg md:text-left">
                 {location}

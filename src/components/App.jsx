@@ -95,8 +95,10 @@ const App = () => {
   //*Prevent overwriting
   useEffect(() => {
     const location = JSON.parse(localStorage.getItem("Route"));
-    const current = location[0].route;
-    navigate(current);
+    if (location) {
+      const current = location[0].route;
+      navigate(current);
+    }
   }, []);
 
   //* Saving sessions to localstorage

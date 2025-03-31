@@ -96,7 +96,7 @@ const App = () => {
               <h1 className="text-white font-mono  text-lg md:text-left">
                 {location}
               </h1>
-              <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 xl:gap-1">
+              <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
                 <Routes>
                   <Route
                     path="/"

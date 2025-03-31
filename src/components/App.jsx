@@ -22,11 +22,13 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
+import axios from "axios";
 
 export const MovieContext = React.createContext();
 export const TopRatedContext = React.createContext();
 export const UpcomingContext = React.createContext();
 export const TvShowsContext = React.createContext();
+export const ValueContext = React.createContext();
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -34,9 +36,48 @@ const App = () => {
   const [upcoming, setUpcoming] = useState([]);
   const [tvShows, setTvShows] = useState([]);
   const [location, setLocation] = useState("");
-  const [route, setRoute] = useState("");
+  const [value, setValue] = useState("");
   const browserPath = useLocation();
   const navigate = useNavigate();
+
+  const handleRouteChange = (current_place) => {
+    let url = "";
+
+    switch (current_place) {
+      case "TV Shows":
+        url = `https://api.themoviedb.org/3/search/tv?query=${value}&include_adult=false&language=en-US&page=1`;
+        break;
+      default:
+        url = `https://api.themoviedb.org/3/search/movie?query=${value}&include_adult=false&language=en-US&page=1`;
+        break;
+    }
+
+    axios
+      .get(url, {
+        headers: {
+          accept: "application/json",
+          Authorization:
+            '"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMGU4MTBlOTAwMDc0ZGI2ODBmNzJjZWNjODI1MTdhMCIsIm5iZiI6MTc0MjA1MDMxOS4xNSwic3ViIjoiNjdkNTk0MGY3OTBkNzg2MzNhMDEzN2U0Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.nKNQgx1xor8E42nVIUGUAfLexUCaCUK13T83LV6oQdY',
+        },
+      })
+      .then((response) => {
+        switch (current_place) {
+          case "Home":
+            setTopRated(response.data.results);
+            break;
+          case "Movies":
+          
+            setMovies(response.data.results);
+            break;
+          case "Upcoming":
+            setUpcoming(response.data.results);
+            break;
+          default:
+            setTvShows(response.data.results);
+            break;
+        }
+      });
+  };
 
   useEffect(() => {
     //* If the path change it sets the location state to the name of the url path
@@ -105,63 +146,66 @@ const App = () => {
   useEffect(() => {
     const route = [{ route: browserPath.pathname }];
     localStorage.setItem("Route", JSON.stringify(route));
+    handleRouteChange(browserPath.pathname);
   }, [location]);
 
   return (
     <div className="flex flex-col items-center gap-5 ">
-      <MovieContext.Provider value={{ setMovies }}>
-        <TopRatedContext.Provider value={{ setTopRated }}>
-          <UpcomingContext.Provider value={{ setUpcoming }}>
-            <TvShowsContext.Provider value={{ setTvShows }}>
-              <Searchbar current_place={location} onChange={setResult} />
-              <Navbars />
-              <h1 className="text-white font-mono  text-lg md:text-left">
-                {location}
-              </h1>
-              <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
-                <Routes>
-                  <Route
-                    path="/"
-                    element={topRated.map((topRated) => (
-                      <TopRated
-                        poster_path={topRated.poster_path}
-                        title={topRated.title}
-                      />
-                    ))}
-                  />
-                  <Route
-                    path="Movies"
-                    element={movies.map((movie) => (
-                      <Movies
-                        poster_path={movie.poster_path}
-                        title={movie.title}
-                      />
-                    ))}
-                  />
-                  <Route
-                    path="Upcoming"
-                    element={upcoming.map((coming) => (
-                      <UpcomingMovies
-                        poster_path={coming.poster_path}
-                        title={coming.title}
-                      />
-                    ))}
-                  />
-                  <Route
-                    path="Tvshows"
-                    element={tvShows.map((show) => (
-                      <TvShows
-                        poster_path={show.poster_path}
-                        name={show.name}
-                      />
-                    ))}
-                  />
-                </Routes>
-              </div>
-            </TvShowsContext.Provider>
-          </UpcomingContext.Provider>
-        </TopRatedContext.Provider>
-      </MovieContext.Provider>
+      <ValueContext.Provider value={{ setValue }}>
+        <MovieContext.Provider value={{ setMovies }}>
+          <TopRatedContext.Provider value={{ setTopRated }}>
+            <UpcomingContext.Provider value={{ setUpcoming }}>
+              <TvShowsContext.Provider value={{ setTvShows }}>
+                <Searchbar current_place={location} onChange={setResult} />
+                <Navbars />
+                <h1 className="text-white font-mono  text-lg md:text-left">
+                  {location}
+                </h1>
+                <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
+                  <Routes>
+                    <Route
+                      path="/"
+                      element={topRated.map((topRated) => (
+                        <TopRated
+                          poster_path={topRated.poster_path}
+                          title={topRated.title}
+                        />
+                      ))}
+                    />
+                    <Route
+                      path="Movies"
+                      element={movies.map((movie) => (
+                        <Movies
+                          poster_path={movie.poster_path}
+                          title={movie.title}
+                        />
+                      ))}
+                    />
+                    <Route
+                      path="Upcoming"
+                      element={upcoming.map((coming) => (
+                        <UpcomingMovies
+                          poster_path={coming.poster_path}
+                          title={coming.title}
+                        />
+                      ))}
+                    />
+                    <Route
+                      path="Tvshows"
+                      element={tvShows.map((show) => (
+                        <TvShows
+                          poster_path={show.poster_path}
+                          name={show.name}
+                        />
+                      ))}
+                    />
+                  </Routes>
+                </div>
+              </TvShowsContext.Provider>
+            </UpcomingContext.Provider>
+          </TopRatedContext.Provider>
+        </MovieContext.Provider>
+      </ValueContext.Provider>
     </div>
   );
 };

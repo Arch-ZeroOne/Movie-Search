@@ -4,9 +4,9 @@ import {
   TopRatedContext,
   UpcomingContext,
   TvShowsContext,
+  ValueContext,
 } from "./App";
 import axios from "axios";
-export const ValueContext = React.createContext();
 
 const Searchbar = ({ current_place }) => {
   //Used the context from the states in the app
@@ -15,6 +15,7 @@ const Searchbar = ({ current_place }) => {
   const { setTopRated } = useContext(TopRatedContext);
   const { setUpcoming } = useContext(UpcomingContext);
   const { setTvShows } = useContext(TvShowsContext);
+  const { setValue } = useContext(ValueContext);
 
   const handleChange = (event) => {
     let url = "";
@@ -55,10 +56,10 @@ const Searchbar = ({ current_place }) => {
         },
       })
       .then((response) => {
-        console.log(response);
         switch (current_place) {
           case "Home":
             setTopRated(response.data.results);
+
             break;
           case "Movies":
             setMovies(response.data.results);

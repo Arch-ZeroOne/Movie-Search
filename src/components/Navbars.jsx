@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
+import { motion } from "motion/react";
 const Navbars = () => {
   const location = useLocation();
 

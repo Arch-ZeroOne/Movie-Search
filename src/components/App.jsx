@@ -6,6 +6,7 @@ import TopRated from "./Movie-Types/TopRated";
 import Movies from "./Movie-Types/Movies";
 import UpcomingMovies from "./Movie-Types/UpcomingMovies";
 import TvShows from "./Movie-Types/TvShows";
+import { motion, useScroll } from "framer-motion";
 
 import {
   getMovies,
@@ -39,6 +40,7 @@ const App = () => {
   const [value, setValue] = useState("");
   const browserPath = useLocation();
   const navigate = useNavigate();
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     //* If the path change it sets the location state to the name of the url path
@@ -110,63 +112,70 @@ const App = () => {
   }, [location]);
 
   return (
-    <div className="flex flex-col items-center gap-5 ">
-      <ValueContext.Provider value={{ setValue }}>
-        <MovieContext.Provider value={{ setMovies }}>
-          <TopRatedContext.Provider value={{ setTopRated }}>
-            <UpcomingContext.Provider value={{ setUpcoming }}>
-              <TvShowsContext.Provider value={{ setTvShows }}>
-                <Searchbar current_place={location} onChange={setResult} />
-                <Navbars />
-                <h1 className="text-white font-mono  text-lg md:text-left">
-                  {location}
-                </h1>
-                <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
-                  <Routes>
-                    <Route
-                      path="/"
-                      element={topRated.map((topRated) => (
-                        <TopRated
-                          poster_path={topRated.poster_path}
-                          title={topRated.title}
-                        />
-                      ))}
-                    />
-                    <Route
-                      path="Movies"
-                      element={movies.map((movie) => (
-                        <Movies
-                          poster_path={movie.poster_path}
-                          title={movie.title}
-                        />
-                      ))}
-                    />
-                    <Route
-                      path="Upcoming"
-                      element={upcoming.map((coming) => (
-                        <UpcomingMovies
-                          poster_path={coming.poster_path}
-                          title={coming.title}
-                        />
-                      ))}
-                    />
-                    <Route
-                      path="Tvshows"
-                      element={tvShows.map((show) => (
-                        <TvShows
-                          poster_path={show.poster_path}
-                          name={show.name}
-                        />
-                      ))}
-                    />
-                  </Routes>
-                </div>
-              </TvShowsContext.Provider>
-            </UpcomingContext.Provider>
-          </TopRatedContext.Provider>
-        </MovieContext.Provider>
-      </ValueContext.Provider>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }} // Start hidden and slightly below
+      whileInView={{ opacity: 1, y: 0 }} // Animate to visible and normal position
+      viewport={{ once: true }} // Only animate once
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <div className="flex flex-col items-center gap-5 ">
+        <ValueContext.Provider value={{ setValue }}>
+          <MovieContext.Provider value={{ setMovies }}>
+            <TopRatedContext.Provider value={{ setTopRated }}>
+              <UpcomingContext.Provider value={{ setUpcoming }}>
+                <TvShowsContext.Provider value={{ setTvShows }}>
+                  <Searchbar current_place={location} onChange={setResult} />
+                  <Navbars />
+                  <h1 className="text-white font-mono  text-lg md:text-left">
+                    {location}
+                  </h1>
+                  <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
+                    <Routes>
+                      <Route
+                        path="/"
+                        element={topRated.map((topRated) => (
+                          <TopRated
+                            poster_path={topRated.poster_path}
+                            title={topRated.title}
+                          />
+                        ))}
+                      />
+                      <Route
+                        path="Movies"
+                        element={movies.map((movie) => (
+                          <Movies
+                            poster_path={movie.poster_path}
+                            title={movie.title}
+                          />
+                        ))}
+                      />
+                      <Route
+                        path="Upcoming"
+                        element={upcoming.map((coming) => (
+                          <UpcomingMovies
+                            poster_path={coming.poster_path}
+                            title={coming.title}
+                          />
+                        ))}
+                      />
+                      <Route
+                        path="Tvshows"
+                        element={tvShows.map((show) => (
+                          <TvShows
+                            poster_path={show.poster_path}
+                            name={show.name}
+                          />
+                        ))}
+                      />
+                    </Routes>
+                  </div>
+                </TvShowsContext.Provider>
+              </UpcomingContext.Provider>
+            </TopRatedContext.Provider>
+          </MovieContext.Provider>
+        </ValueContext.Provider>
+      </div>
+    </motion.div>
   );
 };
 

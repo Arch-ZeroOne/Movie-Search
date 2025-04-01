@@ -1,5 +1,5 @@
 import React from "react";
-
+import { motion } from "framer-motion";
 function Movies({ poster_path, title }) {
   return (
     <div className=" text-white font-[Jetbrains_Mono] p-3 text-center">

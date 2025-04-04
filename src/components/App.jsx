@@ -22,6 +22,7 @@ import {
   useLocation,
   Navigate,
   useNavigate,
+  Link,
 } from "react-router-dom";
 import axios from "axios";
 
@@ -30,17 +31,20 @@ export const TopRatedContext = React.createContext();
 export const UpcomingContext = React.createContext();
 export const TvShowsContext = React.createContext();
 export const ValueContext = React.createContext();
+export const UpcomingCopy = React.createContext();
+export const TopRatedCopy = React.createContext();
 
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [tvShows, setTvShows] = useState([]);
+  const [upcomingCopy, setUpcomingCopy] = useState([]);
+  const [topRatedCopy, setTopRatedCopy] = useState([]);
   const [location, setLocation] = useState("");
   const [value, setValue] = useState("");
   const browserPath = useLocation();
   const navigate = useNavigate();
-  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     //* If the path change it sets the location state to the name of the url path
@@ -68,8 +72,8 @@ const App = () => {
   useEffect(() => {
     const topRated = async () => {
       const topRate = await getTopRated();
-
       setTopRated(topRate.results);
+      setTopRatedCopy(topRate.results);
     };
     topRated();
   }, []);
@@ -79,6 +83,7 @@ const App = () => {
     const upcoming = async () => {
       const upcoming = await getUpcoming();
       setUpcoming(upcoming.results);
+      setUpcomingCopy(upcoming.results);
     };
     upcoming();
   }, []);
@@ -119,61 +124,76 @@ const App = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="flex flex-col items-center gap-5 ">
-        <ValueContext.Provider value={{ setValue }}>
-          <MovieContext.Provider value={{ setMovies }}>
-            <TopRatedContext.Provider value={{ setTopRated }}>
-              <UpcomingContext.Provider value={{ setUpcoming }}>
-                <TvShowsContext.Provider value={{ setTvShows }}>
-                  <Searchbar current_place={location} onChange={setResult} />
-                  <Navbars />
-                  <h1 className="text-white font-mono  text-lg md:text-left">
-                    {location}
-                  </h1>
-                  <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
-                    <Routes>
-                      <Route
-                        path="/"
-                        element={topRated.map((topRated) => (
-                          <TopRated
-                            poster_path={topRated.poster_path}
-                            title={topRated.title}
-                          />
-                        ))}
+        <UpcomingCopy.Provider value={{ upcomingCopy }}>
+          <TopRatedCopy.Provider value={{ topRatedCopy }}>
+            <ValueContext.Provider value={{ setValue }}>
+              <MovieContext.Provider value={{ movies, setMovies }}>
+                <TopRatedContext.Provider value={{ topRated, setTopRated }}>
+                  <UpcomingContext.Provider value={{ upcoming, setUpcoming }}>
+                    <TvShowsContext.Provider value={{ tvShows, setTvShows }}>
+                      <Searchbar
+                        current_place={location}
+                        onChange={setResult}
                       />
-                      <Route
-                        path="Movies"
-                        element={movies.map((movie) => (
-                          <Movies
-                            poster_path={movie.poster_path}
-                            title={movie.title}
+                      <Navbars />
+                      <h1 className="text-white font-mono  text-lg md:text-left">
+                        {location}
+                      </h1>
+                      <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
+                        <Routes>
+                          <Route
+                            path="/"
+                            element={topRated.map((topRated) => (
+                              <Link to={`/${topRated.id}`}>
+                                <TopRated
+                                  poster_path={topRated.poster_path}
+                                  title={topRated.title}
+                                />
+                              </Link>
+                            ))}
                           />
-                        ))}
-                      />
-                      <Route
-                        path="Upcoming"
-                        element={upcoming.map((coming) => (
-                          <UpcomingMovies
-                            poster_path={coming.poster_path}
-                            title={coming.title}
+                          <Route
+                            path="Movies"
+                            element={movies.map((movie) => (
+                              <Link to={`/${movie.id}`}>
+                                <Movies
+                                  poster_path={movie.poster_path}
+                                  title={movie.title}
+                                />
+                              </Link>
+                            ))}
                           />
-                        ))}
-                      />
-                      <Route
-                        path="Tvshows"
-                        element={tvShows.map((show) => (
-                          <TvShows
-                            poster_path={show.poster_path}
-                            name={show.name}
+                          <Route
+                            path="Upcoming"
+                            element={upcoming.map((coming) => (
+                              <Link to={`/${coming.id}`}>
+                                <UpcomingMovies
+                                  poster_path={coming.poster_path}
+                                  title={coming.title}
+                                />
+                              </Link>
+                            ))}
                           />
-                        ))}
-                      />
-                    </Routes>
-                  </div>
-                </TvShowsContext.Provider>
-              </UpcomingContext.Provider>
-            </TopRatedContext.Provider>
-          </MovieContext.Provider>
-        </ValueContext.Provider>
+                          <Route
+                            path="Tvshows"
+                            element={tvShows.map((show) => (
+                              <Link to={`/${show.id}`}>
+                                <TvShows
+                                  poster_path={show.poster_path}
+                                  name={show.name}
+                                />
+                              </Link>
+                            ))}
+                          />
+                        </Routes>
+                      </div>
+                    </TvShowsContext.Provider>
+                  </UpcomingContext.Provider>
+                </TopRatedContext.Provider>
+              </MovieContext.Provider>
+            </ValueContext.Provider>
+          </TopRatedCopy.Provider>
+        </UpcomingCopy.Provider>
       </div>
     </motion.div>
   );

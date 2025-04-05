@@ -1,21 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getTopRated } from "../../Api/FetchRequest";
+import {
+  useTopRated,
+  useTopRatedCopy,
+} from "../../ContextProvider/ContextProvider";
 
-function TopRated({ poster_path, title }) {
+import TopRatedCard from "./TopRatedCard";
+const TopRated = () => {
+  const { topRated, setTopRated } = useTopRated();
+  const { setTopRatedCopy } = useTopRatedCopy();
+  useEffect(() => {
+    const topRated = async () => {
+      const topRate = await getTopRated();
+      setTopRated(topRate.results);
+      setTopRatedCopy(topRate.results);
+    };
+    topRated();
+  }, []);
+
   return (
-    <div className=" text-white font-mono  p-3 text-center  ">
-      <div className=" h-100 flex flex-col items-center gap-4 ">
-        {poster_path ? (
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-            className="w-auto h-[100%] "
-          />
-        ) : (
-          <img src="public/no_poster/poster_error.jpg" alt="poster_error"></img>
-        )}
-        <h2 className="text-xs">{title}</h2>
-      </div>
+    <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
+      {topRated &&
+        topRated.map((movie) => (
+          <TopRatedCard poster_path={movie.poster_path} title={movie.title} />
+        ))}
     </div>
   );
-}
+};
 
 export default TopRated;

@@ -1,19 +1,22 @@
-import React from "react";
-
-function TvShows({ poster_path, name }) {
+import React, { useState, useEffect } from "react";
+import { getTvShows } from "../../Api/FetchRequest";
+import { useTvShows } from "../../ContextProvider/ContextProvider";
+import TvShowsCard from "./TvShowsCard";
+function TvShows() {
+  const { tvShows, setTvShows } = useTvShows();
+  useEffect(() => {
+    const tv = async () => {
+      const tvshows = await getTvShows();
+      setTvShows(tvshows.results);
+    };
+    tv();
+  }, []);
   return (
-    <div className=" text-white font-[Jetbrains_Mono] p-3 text-center">
-      <div className=" h-100 flex flex-col items-center gap-4">
-        {poster_path ? (
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-            className="w-auto h-[100%]"
-          />
-        ) : (
-          <img src="public/no_poster/poster_error.jpg" alt="poster_error"></img>
-        )}
-        <h2>{name}</h2>
-      </div>
+    <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
+      {tvShows &&
+        tvShows.map((show) => (
+          <TvShowsCard name={show.name} poster_path={show.poster_path} />
+        ))}
     </div>
   );
 }

@@ -1,26 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  MovieContext,
-  TopRatedContext,
-  UpcomingContext,
-  TvShowsContext,
-  ValueContext,
-  UpcomingCopy,
-  TopRatedCopy,
-} from "./App";
+
 import axios from "axios";
+import {
+  useMovie,
+  useTopRated,
+  useTopRatedCopy,
+  useTvShows,
+  useUpcoming,
+  useUpcomingCopy,
+} from "./ContextProvider/ContextProvider";
 
 const Searchbar = ({ current_place }) => {
   //Used the context from the states in the app
   //When the context is changed here it automatically affects the context in the main file in short: It updates
-  const { movies, setMovies } = useContext(MovieContext);
-  const { topRated, setTopRated } = useContext(TopRatedContext);
-  const { upcoming, setUpcoming } = useContext(UpcomingContext);
-  const { tvShows, setTvShows } = useContext(TvShowsContext);
-  const { topRatedCopy } = useContext(TopRatedCopy);
-  const { upcomingCopy } = useContext(UpcomingCopy);
-  const { setValue } = useContext(ValueContext);
+  const { movies, setMovies } = useMovie();
+  const { topRated, setTopRated } = useTopRated();
+  const { upcoming, setUpcoming } = useUpcoming();
+  const { tvShows, setTvShows } = useTvShows();
+
   const [inputValue, setIputValue] = useState("");
+
+  const { topRatedCopy } = useTopRatedCopy();
+  const { upcomingCopy } = useUpcomingCopy();
 
   const handleChange = (event) => {
     setIputValue(event.target.value);
@@ -119,8 +120,8 @@ const Searchbar = ({ current_place }) => {
       <input
         type="text"
         placeholder={`Search in ${current_place}`}
-        onChange={handleChange}
         className="bg-[#1F2937] mr-auto ml-auto font-mono w-full p-3 rounded-lg text-sm max-sm:text-center"
+        onChange={handleChange}
       />
     </div>
   );

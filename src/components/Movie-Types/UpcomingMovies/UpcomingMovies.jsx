@@ -1,21 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getUpcoming } from "../../Api/FetchRequest";
+import {
+  useUpcoming,
+  useUpcomingCopy,
+} from "../../ContextProvider/ContextProvider";
+import UpcomingMoviesCard from "./UpcomingMoviesCard";
 
-function UpcomingMovies({ poster_path, title }) {
+const UpcomingMovies = () => {
+  const { upcoming, setUpcoming } = useUpcoming();
+  const { setUpcomingCopy } = useUpcomingCopy();
+  useEffect(() => {
+    const upcoming = async () => {
+      const upcoming = await getUpcoming();
+      setUpcoming(upcoming.results);
+      setUpcomingCopy(upcoming.results);
+    };
+    upcoming();
+  }, []);
+
   return (
-    <div className=" text-white font-[Jetbrains_Mono] p-3 text-center">
-      <div className=" h-100 flex flex-col items-center gap-4">
-        {poster_path ? (
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-            className="w-auto h-[100%]"
+    <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
+      {upcoming &&
+        upcoming.map((movie) => (
+          <UpcomingMoviesCard
+            title={movie.title}
+            poster_path={movie.poster_path}
           />
-        ) : (
-          <img src="public/no_poster/poster_error.jpg" alt="poster_error"></img>
-        )}
-        <h2>{title}</h2>
-      </div>
+        ))}
     </div>
   );
-}
+};
 
 export default UpcomingMovies;

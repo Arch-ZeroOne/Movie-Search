@@ -6,6 +6,7 @@ const UpcomingContext = React.createContext();
 const TvShowsContext = React.createContext();
 const UpcomingCopyContext = React.createContext();
 const TopRatedCopyContext = React.createContext();
+const LocationContext = React.createContext();
 
 export const useMovie = () => {
   return useContext(MovieContext);
@@ -25,6 +26,9 @@ export const useUpcomingCopy = () => {
 export const useTopRatedCopy = () => {
   return useContext(TopRatedCopyContext);
 };
+export const useCurrentLocation = () => {
+  return useContext(LocationContext);
+};
 export default function StateContextProvider({ children }) {
   const [movies, setMovies] = useState([]);
   const [topRated, setTopRated] = useState([]);
@@ -32,26 +36,28 @@ export default function StateContextProvider({ children }) {
   const [tvShows, setTvShows] = useState([]);
   const [upcomingCopy, setUpcomingCopy] = useState([]);
   const [topRatedCopy, setTopRatedCopy] = useState([]);
-
+  const [location, setLocation] = useState("");
   return (
     <>
-      <MovieContext.Provider value={{ movies, setMovies }}>
-        <TopRatedContext.Provider value={{ topRated, setTopRated }}>
-          <UpcomingContext.Provider value={{ upcoming, setUpcoming }}>
-            <TvShowsContext.Provider value={{ tvShows, setTvShows }}>
-              <UpcomingCopyContext.Provider
-                value={{ upcomingCopy, setUpcomingCopy }}
-              >
-                <TopRatedCopyContext.Provider
-                  value={{ topRatedCopy, setTopRatedCopy }}
+      <LocationContext.Provider value={{ location, setLocation }}>
+        <MovieContext.Provider value={{ movies, setMovies }}>
+          <TopRatedContext.Provider value={{ topRated, setTopRated }}>
+            <UpcomingContext.Provider value={{ upcoming, setUpcoming }}>
+              <TvShowsContext.Provider value={{ tvShows, setTvShows }}>
+                <UpcomingCopyContext.Provider
+                  value={{ upcomingCopy, setUpcomingCopy }}
                 >
-                  {children}
-                </TopRatedCopyContext.Provider>
-              </UpcomingCopyContext.Provider>
-            </TvShowsContext.Provider>
-          </UpcomingContext.Provider>
-        </TopRatedContext.Provider>
-      </MovieContext.Provider>
+                  <TopRatedCopyContext.Provider
+                    value={{ topRatedCopy, setTopRatedCopy }}
+                  >
+                    {children}
+                  </TopRatedCopyContext.Provider>
+                </UpcomingCopyContext.Provider>
+              </TvShowsContext.Provider>
+            </UpcomingContext.Provider>
+          </TopRatedContext.Provider>
+        </MovieContext.Provider>
+      </LocationContext.Provider>
     </>
   );
 }

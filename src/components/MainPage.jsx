@@ -2,18 +2,26 @@
 //* Got the location of the current path using the useLocation() from the react router library
 import Searchbar from "./Searchbar";
 import React, { useEffect, useState } from "react";
-import { motion, useScroll } from "framer-motion";
+
 import Navbars from "./Navbars";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Link,
+} from "react-router-dom";
 import Movies from "./Movie-Types/Movies/Movies";
 import TopRated from "./Movie-Types/TopRated/TopRated";
 import TvShows from "./Movie-Types/TvShows/TvShows";
 import UpcomingMovies from "./Movie-Types/UpcomingMovies/UpcomingMovies";
 import { useCurrentLocation } from "./ContextProvider/ContextProvider";
+import ParentComponent from "./ParentComponent";
 const MainPage = () => {
   const { location, setLocation } = useCurrentLocation();
   const browserPath = useLocation();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (browserPath.pathname === "/") {
       setLocation("Home");
@@ -46,28 +54,19 @@ const MainPage = () => {
   }, [location]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }} // Start hidden and slightly below
-      whileInView={{ opacity: 1, y: 0 }} // Animate to visible and normal position
-      viewport={{ once: true }} // Only animate once
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <div className="flex flex-col items-center gap-5 ">
-        <Searchbar current_place={location} />
-        <Navbars />
-        <h1 className="text-white font-mono  text-lg md:text-left">
-          {location}
-        </h1>
-        <div>
-          <Routes>
-            <Route path="/" element={<TopRated />} />
-            <Route path="Movies" element={<Movies />} />
-            <Route path="Upcoming" element={<UpcomingMovies />} />
-            <Route path="Tvshows" element={<TvShows />} />
-          </Routes>
-        </div>
+    <ParentComponent>
+      <Searchbar current_place={location} />
+      <Navbars />
+      <h1 className="text-white font-mono  text-lg md:text-left">{location}</h1>
+      <div>
+        <Routes>
+          <Route path="/" element={<TopRated />} />
+          <Route path="Movies" element={<Movies />} />
+          <Route path="Upcoming" element={<UpcomingMovies />} />
+          <Route path="Tvshows" element={<TvShows />} />
+        </Routes>
       </div>
-    </motion.div>
+    </ParentComponent>
   );
 };
 

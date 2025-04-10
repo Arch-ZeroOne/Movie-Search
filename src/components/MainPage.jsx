@@ -17,6 +17,7 @@ import TvShows from "./Movie-Types/TvShows/TvShows";
 import UpcomingMovies from "./Movie-Types/UpcomingMovies/UpcomingMovies";
 import { useCurrentLocation } from "./ContextProvider/ContextProvider";
 import ParentComponent from "./ParentComponent";
+
 const MainPage = () => {
   const { location, setLocation } = useCurrentLocation();
   const browserPath = useLocation();

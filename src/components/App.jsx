@@ -10,7 +10,7 @@ function App() {
     <ContextProvider>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path={location.pathname} element={<MovieDetails />} />
+        <Route path={`/movie/${location.pathname}`} element={<MovieDetails />} />
       </Routes>
     </ContextProvider>
   );

@@ -10,6 +10,7 @@ import TopRated from "./Movie-Types/TopRated/TopRated";
 import TvShows from "./Movie-Types/TvShows/TvShows";
 import UpcomingMovies from "./Movie-Types/UpcomingMovies/UpcomingMovies";
 import { useCurrentLocation } from "./ContextProvider/ContextProvider";
+import MovieDetails from "./MovieDetails/MovieDetails";
 const MainPage = () => {
   const { location, setLocation } = useCurrentLocation();
   const browserPath = useLocation();
@@ -61,6 +62,7 @@ const MainPage = () => {
         <div>
           <Routes>
             <Route path="/" element={<TopRated />} />
+            <Route path="/toprated/:id" element={<MovieDetails />} />
             <Route path="Movies" element={<Movies />} />
             <Route path="Upcoming" element={<UpcomingMovies />} />
             <Route path="Tvshows" element={<TvShows />} />

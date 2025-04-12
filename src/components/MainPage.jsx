@@ -16,12 +16,8 @@ import TopRated from "./Movie-Types/TopRated/TopRated";
 import TvShows from "./Movie-Types/TvShows/TvShows";
 import UpcomingMovies from "./Movie-Types/UpcomingMovies/UpcomingMovies";
 import { useCurrentLocation } from "./ContextProvider/ContextProvider";
-<<<<<<< HEAD
-import ParentComponent from "./ParentComponent";
-
-=======
 import MovieDetails from "./MovieDetails/MovieDetails";
->>>>>>> site_refactor
+import { motion } from "motion/react";
 const MainPage = () => {
   const { location, setLocation } = useCurrentLocation();
   const browserPath = useLocation();
@@ -59,21 +55,6 @@ const MainPage = () => {
   }, [location]);
 
   return (
-<<<<<<< HEAD
-    <ParentComponent>
-      <Searchbar current_place={location} />
-      <Navbars />
-      <h1 className="text-white font-mono  text-lg md:text-left">{location}</h1>
-      <div>
-        <Routes>
-          <Route path="/" element={<TopRated />} />
-          <Route path="Movies" element={<Movies />} />
-          <Route path="Upcoming" element={<UpcomingMovies />} />
-          <Route path="Tvshows" element={<TvShows />} />
-        </Routes>
-      </div>
-    </ParentComponent>
-=======
     <motion.div
       initial={{ opacity: 0, y: 50 }} // Start hidden and slightly below
       whileInView={{ opacity: 1, y: 0 }} // Animate to visible and normal position
@@ -136,7 +117,6 @@ const MainPage = () => {
         />
       </Routes>
     </motion.div>
->>>>>>> site_refactor
   );
 };
 

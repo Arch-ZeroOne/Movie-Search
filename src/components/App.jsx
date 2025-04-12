@@ -8,10 +8,7 @@ function App() {
 
   return (
     <ContextProvider>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path={`/movie/${location.pathname}`} element={<MovieDetails />} />
-      </Routes>
+      <MainPage />
     </ContextProvider>
   );
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { motion } from "motion/react";
+
 const Navbars = () => {
   const location = useLocation();
 
@@ -16,7 +17,7 @@ const Navbars = () => {
           <li className="hover:bg-blue-600 rounded-xl p-2"> Top Rated</li>
         )}
       </Link>
-      <Link to={"Movies"} className="max-sm:w-full text-center">
+      <Link to={"/Movies"} className="max-sm:w-full text-center">
         {location.pathname === "/Movies" ? (
           <li className="hover:bg-blue-600 rounded-xl p-2 bg-blue-600">
             Movies
@@ -25,7 +26,7 @@ const Navbars = () => {
           <li className="hover:bg-blue-600 rounded-xl p-2"> Movies</li>
         )}
       </Link>
-      <Link to={"Upcoming"} className="max-sm:w-full text-center">
+      <Link to={"/Upcoming"} className="max-sm:w-full text-center">
         {location.pathname === "/Upcoming" ? (
           <li className="hover:bg-blue-600 rounded-xl p-2 bg-blue-600">
             Upcoming Movies
@@ -34,7 +35,7 @@ const Navbars = () => {
           <li className="hover:bg-blue-600 rounded-xl p-2"> Upcoming Movies</li>
         )}
       </Link>
-      <Link to={"Tvshows"} className="max-sm:w-full text-center">
+      <Link to={"/Tvshows"} className="max-sm:w-full text-center">
         {location.pathname === "/Tvshows" ? (
           <li className="hover:bg-blue-600 rounded-xl p-2 bg-blue-600">
             TV Shows

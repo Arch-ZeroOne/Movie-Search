@@ -53,22 +53,61 @@ const MainPage = () => {
       viewport={{ once: true }} // Only animate once
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="flex flex-col items-center gap-5 ">
-        <Searchbar current_place={location} />
-        <Navbars />
-        <h1 className="text-white font-mono  text-lg md:text-left">
-          {location}
-        </h1>
-        <div>
-          <Routes>
-            <Route path="/" element={<TopRated />} />
-            <Route path="/toprated/:id" element={<MovieDetails />} />
-            <Route path="Movies" element={<Movies />} />
-            <Route path="Upcoming" element={<UpcomingMovies />} />
-            <Route path="Tvshows" element={<TvShows />} />
-          </Routes>
-        </div>
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className="flex flex-col justify-items-center items-center gap-5">
+              <Searchbar current_place={location} />
+              <Navbars />
+              <h1 className="text-white font-mono  text-lg md:text-left">
+                {location}
+              </h1>
+              <TopRated />
+            </div>
+          }
+        />
+
+        <Route
+          path="/Movies"
+          element={
+            <div className="flex flex-col justify-items-center items-center gap-5">
+              <Searchbar current_place={location} />
+              <Navbars />
+              <h1 className="text-white font-mono  text-lg md:text-left">
+                {location}
+              </h1>
+              <Movies />
+            </div>
+          }
+        />
+        <Route
+          path="/Upcoming"
+          element={
+            <div className="flex flex-col justify-items-center items-center gap-5">
+              <Searchbar current_place={location} />
+              <Navbars />
+              <h1 className="text-white font-mono  text-lg md:text-left">
+                {location}
+              </h1>
+              <UpcomingMovies />
+            </div>
+          }
+        />
+        <Route
+          path="/Tvshows"
+          element={
+            <div className="flex flex-col justify-items-center items-center gap-5">
+              <Searchbar current_place={location} />
+              <Navbars />
+              <h1 className="text-white font-mono  text-lg md:text-left">
+                {location}
+              </h1>
+              <TvShows />
+            </div>
+          }
+        />
+      </Routes>
     </motion.div>
   );
 };

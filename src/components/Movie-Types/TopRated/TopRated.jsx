@@ -10,6 +10,7 @@ import TopRatedCard from "./TopRatedCard";
 const TopRated = () => {
   const { topRated, setTopRated } = useTopRated();
   const { setTopRatedCopy } = useTopRatedCopy();
+
   useEffect(() => {
     const topRated = async () => {
       const topRate = await getTopRated();

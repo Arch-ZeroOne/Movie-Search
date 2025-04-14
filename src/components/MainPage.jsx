@@ -116,7 +116,8 @@ const MainPage = () => {
               <TvShows />
             </div>
           }
-        ></Route>
+        />
+        <Route path="/toprated/:id" element={<MovieDetails />} />
       </Routes>
     </motion.div>
   );

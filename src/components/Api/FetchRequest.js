@@ -81,7 +81,7 @@ export async function getTvShows() {
   }
 }
 
-export async function getExternalId(movie_id) {
+export async function getMovieById(movie_id) {
   const options = {
     method: "GET",
     headers: {
@@ -90,24 +90,7 @@ export async function getExternalId(movie_id) {
     },
   };
   const request = await fetch(
-    `https://api.themoviedb.org/3/movie/${movie_id}/external_ids`,
-    options
-  );
-
-  if (request.ok) {
-    return await request.json();
-  }
-}
-export async function getByExternalId(external_id) {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: accessToken,
-    },
-  };
-  const request = await fetch(
-    `https://api.themoviedb.org/3/find/${external_id}?external_source=imdb_id`,
+    `https://api.themoviedb.org/3/movie/${movie_id}`,
     options
   );
 

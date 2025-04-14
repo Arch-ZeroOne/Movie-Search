@@ -1,40 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getByExternalId, getExternalId } from "../Api/FetchRequest";
 import MovieDetailsCard from "./MovieDetailsCard";
+import { useParams } from "react-router-dom";
+import { getMovieById } from "../Api/FetchRequest";
+
 function MovieDetails() {
   const { id } = useParams();
-  const [externalId, setExternalId] = useState();
-  const [details, setDetails] = useState();
+  const [movieDetails, setMovieDetails] = useState();
 
   useEffect(() => {
-    const getExternal = async () => {
-      const received = await getExternalId(id);
-      setExternalId(received.imdb_id);
+    const getDetails = async () => {
+      const details = await getMovieById(id);
+
+      setMovieDetails(details);
     };
-    getExternal();
+    getDetails();
   }, [id]);
 
   useEffect(() => {
-    if (externalId) {
-      const getMovieId = async () => {
-        const getMovie = await getByExternalId(externalId);
-        const result = getMovie;
-        console.log(result.movie_results);
-        setDetails(result.movie_results);
-      };
-      getMovieId();
-    }
-  }, [externalId]);
+    console.log(movieDetails);
+  }, [movieDetails]);
 
   return (
     <div>
-      {details && (
+      {movieDetails && (
         <MovieDetailsCard
-          backdrop_path={details[0].backdrop_path}
-          title={details[0].title}
-          overview={details[0].overview}
-          poster_path={details[0].poster_path}
+          key={movieDetails.id}
+          backdrop_path={movieDetails.backdrop_path}
+          title={movieDetails.title}
+          poster_path={movieDetails.poster_path}
+          overview={movieDetails.overview}
+          vote_count={movieDetails.vote_count}
+          release_date={movieDetails.release_date}
+          vote_average={movieDetails.vote_average}
         />
       )}
     </div>

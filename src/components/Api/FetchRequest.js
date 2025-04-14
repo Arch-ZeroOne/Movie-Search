@@ -80,3 +80,21 @@ export async function getTvShows() {
     return convert;
   }
 }
+
+export async function getMovieById(movie_id) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
+  };
+  const request = await fetch(
+    `https://api.themoviedb.org/3/movie/${movie_id}`,
+    options
+  );
+
+  if (request.ok) {
+    return await request.json();
+  }
+}

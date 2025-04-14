@@ -118,6 +118,8 @@ const MainPage = () => {
           }
         />
         <Route path="/toprated/:id" element={<MovieDetails />} />
+        <Route path="/movies/:id" element={<MovieDetails />} />
+        <Route path="/upcoming/:id" element={<MovieDetails />} />
       </Routes>
     </motion.div>
   );

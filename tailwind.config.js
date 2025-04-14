@@ -7,4 +7,5 @@ module.exports = {
       backgroundImage: {},
     },
   },
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };

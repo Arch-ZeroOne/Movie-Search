@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../public/images/remove.png";
 import human from "../../../public/images/3d-movie.png";
 import like from "../../../public/images/like.png";
 import release from "../../../public/images/video-player.png";
 import rating from "../../../public/images/star.png";
-import { div } from "motion/react-client";
+import {
+  useCurrentKey,
+  useVisibility,
+} from "../ContextProvider/ContextProvider";
+import Trailer from "../Trailer/Trailer";
 function MovieDetailsCard({
   backdrop_path,
   title,
@@ -15,9 +19,14 @@ function MovieDetailsCard({
   vote_average,
   genres,
 }) {
+  const { key } = useCurrentKey();
+  const { visible } = useVisibility();
   const backdrop = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
   const poster = `https://image.tmdb.org/t/p/original/${poster_path}`;
 
+  useEffect(() => {
+    console.log("CLicked");
+  }, [visible]);
   return (
     <div className="text-white">
       <div
@@ -34,6 +43,7 @@ function MovieDetailsCard({
             className="h-15 hover:opacity-50 cursor-pointer"
           ></img>
         </Nav>
+        {visible && <Trailer id={key} />}
 
         <div>
           <Poster
@@ -106,9 +116,13 @@ const Synopsis = ({ overview, title }) => {
 const Genres = ({ genre }) => {
   const concepts = genre.map((movie, index) =>
     index + 1 !== genre.length ? (
-      <p className="font-medium">{movie.name},</p>
+      <p className="font-medium" key={index}>
+        {movie.name},
+      </p>
     ) : (
-      <p className="font-medium">{movie.name}</p>
+      <p className="font-medium" key={index}>
+        {movie.name}
+      </p>
     )
   );
 
@@ -121,8 +135,16 @@ const Genres = ({ genre }) => {
 };
 
 const WatchTrailer = () => {
+  const { visible, setVisible } = useVisibility();
+
+  useEffect(() => {
+    console.log(visible);
+  }, [visible]);
   return (
-    <div className="flex flex-col justify-center items-center h-25 w-28 bg-black shadow-2xl hover:opacity-50 cursor-pointer gap-3 rounded-lg">
+    <div
+      className="flex flex-col justify-center items-center h-25 w-28 bg-black shadow-2xl hover:opacity-50 cursor-pointer gap-3 rounded-lg"
+      onClick={() => setVisible(!visible)}
+    >
       <i className="fa-solid fa-play text-4xl"></i>
       <h3 className="text-xs">Watch Trailer</h3>
     </div>

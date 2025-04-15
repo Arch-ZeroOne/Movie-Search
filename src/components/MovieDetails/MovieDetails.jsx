@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import MovieDetailsCard from "./MovieDetailsCard";
 import { useParams } from "react-router-dom";
-import Trailer from "../Trailer/Trailer";
 import { getMovieById, getVideo } from "../Api/FetchRequest";
 import { filter, tr } from "motion/react-client";
+import { useCurrentKey } from "../ContextProvider/ContextProvider";
 
 function MovieDetails() {
   const { id } = useParams();
+  const { setKey } = useCurrentKey();
   const [movieDetails, setMovieDetails] = useState();
   const [trailers, setTrailers] = useState();
   const [trailerId, setTrailerId] = useState();
@@ -29,13 +30,16 @@ function MovieDetails() {
 
   useEffect(() => {
     if (trailers) {
-      const filterTrailer = trailers.filter(
-        (trailer) => trailer.type === "Trailer" && trailer.name === "Trailer"
-      );
-
-      setTrailerId(filterTrailer[0].key);
+      const filter = trailers.filter((trailer) => trailer.type === "Trailer");
+      setTrailerId(filter[0].key);
     }
   }, [trailers]);
+
+  useEffect(() => {
+    if (trailerId) {
+      setKey(trailerId);
+    }
+  }, [trailerId]);
 
   return (
     <div>
@@ -52,7 +56,6 @@ function MovieDetails() {
           genres={movieDetails.genres}
         />
       )}
-      {trailerId && <Trailer id={trailerId} />}
     </div>
   );
 }

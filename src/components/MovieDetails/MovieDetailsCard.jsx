@@ -137,9 +137,6 @@ const Genres = ({ genre }) => {
 const WatchTrailer = () => {
   const { visible, setVisible } = useVisibility();
 
-  useEffect(() => {
-    console.log(visible);
-  }, [visible]);
   return (
     <div
       className="flex flex-col justify-center items-center h-25 w-28 bg-black shadow-2xl hover:opacity-50 cursor-pointer gap-3 rounded-lg"

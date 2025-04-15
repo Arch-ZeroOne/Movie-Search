@@ -88,9 +88,7 @@ const MainPage = () => {
               <Movies />
             </div>
           }
-        >
-          <Route path=":id" element={<MovieDetails />} />
-        </Route>
+        ></Route>
         <Route
           path="/Upcoming"
           element={
@@ -120,6 +118,7 @@ const MainPage = () => {
         <Route path="/toprated/:id" element={<MovieDetails />} />
         <Route path="/movies/:id" element={<MovieDetails />} />
         <Route path="/upcoming/:id" element={<MovieDetails />} />
+        <Route path="/tvshows/:id" element={<MovieDetails />} />
       </Routes>
     </motion.div>
   );

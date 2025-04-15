@@ -98,6 +98,24 @@ export async function getMovieById(movie_id) {
     return await request.json();
   }
 }
+
+export async function getTvShowById(show_id) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
+  };
+  const request = await fetch(
+    `https://api.themoviedb.org/3/tv/${show_id}`,
+    options
+  );
+
+  if (request.ok) {
+    return await request.json();
+  }
+}
 export async function getVideo(movie_id) {
   const options = {
     method: "GET",
@@ -116,5 +134,3 @@ export async function getVideo(movie_id) {
     return await request.json();
   }
 }
-
-

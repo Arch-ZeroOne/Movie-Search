@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MovieDetailsCard from "./MovieDetailsCard";
 import { useParams } from "react-router-dom";
-import { getMovieById, getVideo } from "../Api/FetchRequest";
+import { getMovieById, getVideo, getTvShowById } from "../Api/FetchRequest";
 import { filter, tr } from "motion/react-client";
 import { useCurrentKey } from "../ContextProvider/ContextProvider";
 
@@ -11,11 +11,17 @@ function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState();
   const [trailers, setTrailers] = useState();
   const [trailerId, setTrailerId] = useState();
+  const currentLocation = window.location.pathname;
 
   useEffect(() => {
     const getDetails = async () => {
-      const details = await getMovieById(id);
-      setMovieDetails(details);
+      if (currentLocation.includes("tvshows")) {
+        const details = await getTvShowById(id);
+        setMovieDetails(details);
+      } else {
+        const details = await getMovieById(id);
+        setMovieDetails(details);
+      }
     };
     getDetails();
   }, [id]);

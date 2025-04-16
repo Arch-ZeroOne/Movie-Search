@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import MovieDetailsCard from "./MovieDetailsCard";
 import { useParams } from "react-router-dom";
 import { getMovieById, getVideo, getTvShowById } from "../Api/FetchRequest";
-import { filter, tr } from "motion/react-client";
 import { useCurrentKey } from "../ContextProvider/ContextProvider";
 
 function MovieDetails() {

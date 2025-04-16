@@ -24,7 +24,7 @@ const TopRated = () => {
     <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
       {topRated &&
         topRated.map((movie) => (
-          <Link key={movie.id} to={`/toprated/${movie.id}`}>
+          <Link key={movie.id} to={`/${movie.id}`}>
             <TopRatedCard
               key={movie.id}
               poster_path={movie.poster_path}

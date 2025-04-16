@@ -75,7 +75,7 @@ const MainPage = () => {
             </div>
           }
         />
-        <Route path="/toprated/:id" element={<MovieDetails />} />
+
         <Route
           path="/Movies"
           element={
@@ -88,7 +88,8 @@ const MainPage = () => {
               <Movies />
             </div>
           }
-        ></Route>
+        />
+
         <Route
           path="/Upcoming"
           element={
@@ -115,10 +116,11 @@ const MainPage = () => {
             </div>
           }
         />
-        <Route path="/toprated/:id" element={<MovieDetails />} />
-        <Route path="/movies/:id" element={<MovieDetails />} />
-        <Route path="/upcoming/:id" element={<MovieDetails />} />
-        <Route path="/tvshows/:id" element={<MovieDetails />} />
+
+        <Route path="/:id" element={<MovieDetails />} />
+        <Route path="/Movies/:id" element={<MovieDetails />} />
+        <Route path="/Upcoming/:id" element={<MovieDetails />} />
+        <Route path="/Tvshows/:id" element={<MovieDetails />} />
       </Routes>
     </motion.div>
   );

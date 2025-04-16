@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import logo from "../../../public/images/remove.png";
 import human from "../../../public/images/3d-movie.png";
 import like from "../../../public/images/like.png";
 import release from "../../../public/images/video-player.png";
 import rating from "../../../public/images/star.png";
+import closeBig from "../../../public/close/close-big.png";
+import { useNavigate } from "react-router-dom";
+import closeSmall from "../../../public/close/close-small.png";
 import {
   useCurrentKey,
   useVisibility,
@@ -39,8 +41,8 @@ function MovieDetailsCard({
       >
         <Nav>
           <img
-            src={logo}
-            className="h-15 hover:opacity-50 cursor-pointer"
+            src={closeSmall}
+            className="h-15 p-2 hover:opacity-50 cursor-pointer"
           ></img>
         </Nav>
         {visible && <Trailer id={key} />}
@@ -62,8 +64,22 @@ function MovieDetailsCard({
 }
 
 const Nav = ({ children }) => {
+  const navigate = useNavigate();
+  const navigateBack = () => {
+    const currentLocation = window.location.pathname.split("/");
+    const getRoot = currentLocation[1];
+
+    if (Number(getRoot)) {
+      navigate("/");
+    } else {
+      navigate(`/${getRoot}`);
+    }
+  };
   return (
-    <section className="flex  items-center justify-between p-5">
+    <section
+      className="flex  items-center justify-between p-5 "
+      onClick={navigateBack}
+    >
       {children}
     </section>
   );

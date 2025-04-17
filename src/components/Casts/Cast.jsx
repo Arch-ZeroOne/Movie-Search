@@ -13,7 +13,7 @@ function Cast({ id }) {
   }, [id]);
 
   return (
-    <div className="w-full">
+    <div className="w-[90vw]  ml-auto mr-auto items-center flex p-5 overflow-x-auto overflow-y-hidden">
       <CastCard {...cast} />
     </div>
   );

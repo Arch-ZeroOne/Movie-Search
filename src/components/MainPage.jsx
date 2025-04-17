@@ -18,6 +18,7 @@ import UpcomingMovies from "./Movie-Types/UpcomingMovies/UpcomingMovies";
 import { useCurrentLocation } from "./ContextProvider/ContextProvider";
 import MovieDetails from "./MovieDetails/MovieDetails";
 import { motion } from "motion/react";
+import { div } from "motion/react-client";
 const MainPage = () => {
   const { location, setLocation } = useCurrentLocation();
   const browserPath = useLocation();

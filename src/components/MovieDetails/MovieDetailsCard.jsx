@@ -29,7 +29,7 @@ function MovieDetailsCard({
   const poster = `https://image.tmdb.org/t/p/original/${poster_path}`;
 
   return (
-    <div className="text-white">
+    <div className="text-white flex flex-col gap-2">
       <div
         style={{
           background: `url(${backdrop})`,
@@ -101,15 +101,15 @@ const Poster = ({
           <h1 className="font-bold text-4xl   ">{title}</h1>
           <div className="flex flex-col gap-5">
             <span className="flex items-center gap-2">
-              <img src={like} alt="Like" className="h-8" />
+              <img src={like} alt="Like" className="h-6" />
               <p className="font-medium ">{vote}</p>
             </span>
             <span className="flex items-center gap-2">
-              <img src={rating} alt="Rating" className="h-8 gap-2" />
+              <img src={rating} alt="Rating" className="h-6 gap-2" />
               <p>{vote_average}</p>
             </span>
             <span className="flex items-center gap-2">
-              <img src={release} alt="Release" className="h-8" />
+              <img src={release} alt="Release" className="h-6" />
               <p className="font-medium">{release_date}</p>
             </span>
             <Genres genre={concept} />

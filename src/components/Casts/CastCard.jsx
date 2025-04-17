@@ -21,14 +21,14 @@ function CastCard(props) {
   useEffect(() => {
     if (casts) {
       const generateCard = casts.map((cast) => (
-        <div className="flex flex-col gap-5 w-100 ">
+        <div className="flex flex-col gap-3 w-50">
           <img
             src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
-            className="h-100 full"
+            className="h-80 full"
           ></img>
-          <div className="flex items-center flex-col">
-            <h2 className="text-xl">{cast.name}</h2>
-            <h2>as</h2>
+          <div className="flex flex-col text-lg">
+            <h2>{cast.name} as</h2>
+
             <h2>{cast.character}</h2>
           </div>
         </div>
@@ -38,9 +38,9 @@ function CastCard(props) {
   }, [casts]);
 
   return (
-    <div>
-      <h1 className="text-2xl">Casts</h1>
-      <div className="flex  whitespace-nowrap  justify-between   items-center gap-5   overflow-x-auto overflow-y-hidden">
+    <div className="flex flex-col gap-3">
+      <h1 className="text-3xl ">Cast</h1>
+      <div className="flex  whitespace-nowrap    items-center gap-5   ">
         {card && card}
       </div>
     </div>

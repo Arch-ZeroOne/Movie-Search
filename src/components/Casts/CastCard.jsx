@@ -40,7 +40,7 @@ function CastCard(props) {
   return (
     <div className="flex flex-col gap-3">
       <h1 className="text-3xl ">Cast</h1>
-      <div className="flex  whitespace-nowrap    items-center gap-5   ">
+      <div className="flex  whitespace-nowrap items-center gap-5 ">
         {card && card}
       </div>
     </div>

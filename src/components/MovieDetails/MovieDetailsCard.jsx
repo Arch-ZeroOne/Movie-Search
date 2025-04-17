@@ -154,12 +154,24 @@ const WatchTrailer = () => {
   const { visible, setVisible } = useVisibility();
 
   return (
-    <div
-      className="flex flex-col justify-center items-center h-25 w-28 bg-black shadow-2xl hover:opacity-50 cursor-pointer gap-3 rounded-lg"
-      onClick={() => setVisible(!visible)}
-    >
-      <i className="fa-solid fa-play text-4xl"></i>
-      <h3 className="text-xs">Watch Trailer</h3>
+    <div>
+      {visible ? (
+        <div
+          className=" flex flex-col justify-center items-center h-25 w-28 bg-black shadow-2xl hover:opacity-50 cursor-pointer gap-3 rounded-lg"
+          onClick={() => setVisible(true)}
+        >
+          <i className="fa-solid fa-play text-4xl"></i>
+          <h3 className="text-xs">Watch Trailer</h3>
+        </div>
+      ) : (
+        <div
+          className="flex flex-col justify-center items-center h-25 w-28 bg-black shadow-2xl hover:opacity-50 cursor-pointer gap-3 rounded-lg"
+          onClick={() => setVisible(true)}
+        >
+          <i className="fa-solid fa-play text-4xl"></i>
+          <h3 className="text-xs">Watch Trailer</h3>
+        </div>
+      )}
     </div>
   );
 };

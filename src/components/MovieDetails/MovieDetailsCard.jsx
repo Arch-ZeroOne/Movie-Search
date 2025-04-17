@@ -32,7 +32,7 @@ function MovieDetailsCard({
     <div className="text-white flex flex-col gap-2">
       <div
         style={{
-          background: `url(${backdrop})`,
+          backgroundImage: `linear-gradient(to right, rgb(0,0,0),transparent), url(${backdrop})`,
           height: "700px",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
@@ -65,6 +65,7 @@ function MovieDetailsCard({
 
 const Nav = ({ children }) => {
   const navigate = useNavigate();
+  const { setVisible } = useVisibility();
   const navigateBack = () => {
     const currentLocation = window.location.pathname.split("/");
     const getRoot = currentLocation[1];
@@ -74,6 +75,7 @@ const Nav = ({ children }) => {
     } else {
       navigate(`/${getRoot}`);
     }
+    setVisible(false);
   };
   return (
     <section
@@ -94,7 +96,7 @@ const Poster = ({
   concept,
 }) => {
   return (
-    <div className="flex p-5  gap-3 font-mono items-center justify-between">
+    <div className="flex p-5  gap-3 items-center justify-between">
       <div className="flex gap-5 items-center">
         <img src={poster} alt="Movie Poster" className="h-100 w-70 " />
         <section className="flex flex-col gap-8 ">

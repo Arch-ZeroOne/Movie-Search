@@ -134,3 +134,22 @@ export async function getVideo(movie_id) {
     return await request.json();
   }
 }
+
+export async function getMovieCast(movie_id) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
+  };
+
+  const request = await fetch(
+    `https://api.themoviedb.org/3/movie/${movie_id}/credits`,
+    options
+  );
+
+  if (request.ok) {
+    return await request.json();
+  }
+}

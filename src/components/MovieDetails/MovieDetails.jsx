@@ -59,6 +59,7 @@ function MovieDetails() {
           release_date={movieDetails.release_date}
           vote_average={movieDetails.vote_average}
           genres={movieDetails.genres}
+          movie_id={movieDetails.id}
         />
       )}
     </div>

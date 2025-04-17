@@ -5,6 +5,7 @@ import release from "../../../public/images/video-player.png";
 import rating from "../../../public/images/star.png";
 import closeBig from "../../../public/close/close-big.png";
 import { useNavigate } from "react-router-dom";
+import Cast from "../Casts/Cast";
 import closeSmall from "../../../public/close/close-small.png";
 import {
   useCurrentKey,
@@ -20,15 +21,13 @@ function MovieDetailsCard({
   release_date,
   vote_average,
   genres,
+  movie_id,
 }) {
   const { key } = useCurrentKey();
   const { visible } = useVisibility();
   const backdrop = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
   const poster = `https://image.tmdb.org/t/p/original/${poster_path}`;
 
-  useEffect(() => {
-    console.log("CLicked");
-  }, [visible]);
   return (
     <div className="text-white">
       <div
@@ -59,6 +58,7 @@ function MovieDetailsCard({
           <Synopsis overview={overview} title={title} />
         </div>
       </div>
+      <Cast id={movie_id} />
     </div>
   );
 }

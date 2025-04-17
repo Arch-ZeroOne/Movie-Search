@@ -2,7 +2,7 @@ import React from "react";
 
 function TopRatedCard({ poster_path, title }) {
   return (
-    <div className=" text-white font-mono  p-3 text-center  ">
+    <div className=" text-white font-mono   text-center  ">
       <div className=" h-100 flex flex-col items-center gap-4 ">
         {poster_path ? (
           <img

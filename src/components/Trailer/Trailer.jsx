@@ -19,7 +19,6 @@ function Trailer({ id }) {
 
   const changeVisibility = () => {
     setVisible(false);
-    setKey("");
   };
   return (
     <div className="w-[80%] h-300 flex absolute top-10 right-30 flex-col ">

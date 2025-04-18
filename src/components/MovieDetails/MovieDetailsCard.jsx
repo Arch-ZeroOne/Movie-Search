@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import human from "../../../public/images/3d-movie.png";
 import like from "../../../public/images/like.png";
 import release from "../../../public/images/video-player.png";
@@ -67,6 +67,7 @@ function MovieDetailsCard({
 
 const Nav = ({ children }) => {
   const navigate = useNavigate();
+  const { key } = useCurrentKey();
   const { setVisible } = useVisibility();
   const navigateBack = () => {
     const currentLocation = window.location.pathname.split("/");
@@ -78,6 +79,7 @@ const Nav = ({ children }) => {
       navigate(`/${getRoot}`);
     }
     setVisible(false);
+    setKey("");
   };
   return (
     <section

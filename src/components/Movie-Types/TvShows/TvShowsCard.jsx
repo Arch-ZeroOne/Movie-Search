@@ -2,7 +2,7 @@ import React from "react";
 
 function TvShowsCard({ poster_path, name }) {
   return (
-    <div className=" text-white font-[Jetbrains_Mono] p-3 text-center">
+    <div className=" text-white font-[Jetbrains_Mono]  text-center">
       <div className=" h-100 flex flex-col items-center gap-4">
         {poster_path ? (
           <img

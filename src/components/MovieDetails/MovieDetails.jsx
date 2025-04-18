@@ -5,15 +5,20 @@ import { getMovieById, getVideo, getTvShowById } from "../Api/FetchRequest";
 import { useCurrentKey } from "../ContextProvider/ContextProvider";
 import { useCurrentTrailer } from "../ContextProvider/ContextProvider";
 function MovieDetails() {
+  //* Gets the dynamic id in the browser url
   const { id } = useParams();
+  //* Gets the current movie key
   const { setKey } = useCurrentKey();
+  //* Gets the current Trailer
+  const { setHasTrailer } = useCurrentTrailer();
+
   const [movieDetails, setMovieDetails] = useState();
   const [trailers, setTrailers] = useState();
   const [trailerId, setTrailerId] = useState();
-  const { hastrailer, setHasTrailer } = useCurrentTrailer();
+
   const currentLocation = window.location.pathname;
 
-  //*Handles the filterig og movies and tv shows
+  //*Handles the filtering og movies and tv shows
   useEffect(() => {
     const getDetails = async () => {
       if (currentLocation.includes("tvshows")) {
@@ -27,6 +32,7 @@ function MovieDetails() {
     getDetails();
   }, [id]);
 
+  //* Handles the request of movies
   useEffect(() => {
     const getVideoDetails = async () => {
       const vidDetails = await getVideo(id);
@@ -35,10 +41,12 @@ function MovieDetails() {
     getVideoDetails();
   }, [id]);
 
+  //* Filters the trailer and getting the first one
   useEffect(() => {
     if (trailers) {
       const filter = trailers.filter((trailer) => trailer.type === "Trailer");
 
+      //* Checks if the trailer is empty
       if (filter.length > 0) {
         setTrailerId(filter[0].key);
         setHasTrailer(true);
@@ -48,6 +56,7 @@ function MovieDetails() {
     }
   }, [trailers]);
 
+  //* Sets the current trailer key
   useEffect(() => {
     if (trailerId) {
       setKey(trailerId);

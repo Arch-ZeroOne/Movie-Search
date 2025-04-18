@@ -12,6 +12,7 @@ const KeyContext = React.createContext();
 const VisibilityContext = React.createContext();
 const TrailerContext = React.createContext();
 
+//* Custom Hooks for using the global context
 export const useMovie = () => {
   return useContext(MovieContext);
 };
@@ -42,7 +43,9 @@ export const useVisibility = () => {
 export const useCurrentTrailer = () => {
   return useContext(TrailerContext);
 };
+//* Receives a children prop that contains what the context provider will wrap
 export default function StateContextProvider({ children }) {
+  //* Global states
   const [movies, setMovies] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [upcoming, setUpcoming] = useState([]);

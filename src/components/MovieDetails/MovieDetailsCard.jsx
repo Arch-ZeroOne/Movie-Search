@@ -24,8 +24,11 @@ function MovieDetailsCard({
   genres,
   movie_id,
 }) {
+  //*Global States
   const { key } = useCurrentKey();
   const { visible } = useVisibility();
+
+  //* Poster and backdrops
   const backdrop = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
   const poster = `https://image.tmdb.org/t/p/original/${poster_path}`;
 

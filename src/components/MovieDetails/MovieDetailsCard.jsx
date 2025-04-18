@@ -7,6 +7,7 @@ import closeBig from "../../../public/close/close-big.png";
 import { useNavigate } from "react-router-dom";
 import Cast from "../Casts/Cast";
 import closeSmall from "../../../public/close/close-small.png";
+import SimilarMovies from "../SimilarMovies/SimilarMovies";
 import {
   useCurrentKey,
   useVisibility,
@@ -59,6 +60,7 @@ function MovieDetailsCard({
         </div>
       </div>
       <Cast id={movie_id} />
+      <SimilarMovies />
     </div>
   );
 }

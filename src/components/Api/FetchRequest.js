@@ -153,3 +153,20 @@ export async function getMovieCast(movie_id) {
     return await request.json();
   }
 }
+
+export async function getSimilarMovies(movie_id) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
+  };
+  const request = await fetch(
+    `https://api.themoviedb.org/3/movie/${movie_id}/similar`,
+    options
+  );
+  if (request.ok) {
+    return await request.json();
+  }
+}

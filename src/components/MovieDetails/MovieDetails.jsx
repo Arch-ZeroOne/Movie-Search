@@ -12,6 +12,7 @@ function MovieDetails() {
   const [trailerId, setTrailerId] = useState();
   const currentLocation = window.location.pathname;
 
+  //*Handles the filterig og movies and tv shows
   useEffect(() => {
     const getDetails = async () => {
       if (currentLocation.includes("tvshows")) {

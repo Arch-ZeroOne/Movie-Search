@@ -1,11 +1,25 @@
 import React from "react";
 import { useVisibility } from "../ContextProvider/ContextProvider";
+import { useCurrentKey } from "../ContextProvider/ContextProvider";
+import Swal from "sweetalert2";
 function Trailer({ id }) {
   const { setVisible } = useVisibility();
+  const { setKey } = useCurrentKey();
   const trailer_key = `https://www.youtube.com/embed/${id}`;
+
+  if (!id) {
+    Swal.fire({
+      title: "No trailer found",
+      text: "No trailer is available for this movie",
+      icon: "error",
+    });
+
+    setVisible(false);
+  }
 
   const changeVisibility = () => {
     setVisible(false);
+    setKey("");
   };
   return (
     <div className="w-[80%] h-300 flex absolute top-10 right-30 flex-col ">

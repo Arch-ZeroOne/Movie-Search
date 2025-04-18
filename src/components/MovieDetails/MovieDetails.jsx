@@ -37,7 +37,12 @@ function MovieDetails() {
   useEffect(() => {
     if (trailers) {
       const filter = trailers.filter((trailer) => trailer.type === "Trailer");
-      setTrailerId(filter[0].key);
+
+      if (filter.length > 0) {
+        setTrailerId(filter[0].key);
+      } else {
+        console.log("No Videos");
+      }
     }
   }, [trailers]);
 

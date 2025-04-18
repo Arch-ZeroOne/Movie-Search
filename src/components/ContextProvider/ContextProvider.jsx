@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import Trailer from "../Trailer/Trailer";
 
 const MovieContext = React.createContext();
 const TopRatedContext = React.createContext();
@@ -9,6 +10,7 @@ const TopRatedCopyContext = React.createContext();
 const LocationContext = React.createContext();
 const KeyContext = React.createContext();
 const VisibilityContext = React.createContext();
+const TrailerContext = React.createContext();
 
 export const useMovie = () => {
   return useContext(MovieContext);
@@ -37,6 +39,9 @@ export const useCurrentKey = () => {
 export const useVisibility = () => {
   return useContext(VisibilityContext);
 };
+export const useCurrentTrailer = () => {
+  return useContext(TrailerContext);
+};
 export default function StateContextProvider({ children }) {
   const [movies, setMovies] = useState([]);
   const [topRated, setTopRated] = useState([]);
@@ -47,31 +52,34 @@ export default function StateContextProvider({ children }) {
   const [location, setLocation] = useState("");
   const [visible, setVisible] = useState(false);
   const [key, setKey] = useState("");
+  const [hastrailer, setHasTrailer] = useState(false);
   return (
     <>
-      <VisibilityContext value={{ visible, setVisible }}>
-        <KeyContext value={{ key, setKey }}>
-          <LocationContext.Provider value={{ location, setLocation }}>
-            <MovieContext.Provider value={{ movies, setMovies }}>
-              <TopRatedContext.Provider value={{ topRated, setTopRated }}>
-                <UpcomingContext.Provider value={{ upcoming, setUpcoming }}>
-                  <TvShowsContext.Provider value={{ tvShows, setTvShows }}>
-                    <UpcomingCopyContext.Provider
-                      value={{ upcomingCopy, setUpcomingCopy }}
-                    >
-                      <TopRatedCopyContext.Provider
-                        value={{ topRatedCopy, setTopRatedCopy }}
+      <TrailerContext.Provider value={{ hastrailer, setHasTrailer }}>
+        <VisibilityContext value={{ visible, setVisible }}>
+          <KeyContext value={{ key, setKey }}>
+            <LocationContext.Provider value={{ location, setLocation }}>
+              <MovieContext.Provider value={{ movies, setMovies }}>
+                <TopRatedContext.Provider value={{ topRated, setTopRated }}>
+                  <UpcomingContext.Provider value={{ upcoming, setUpcoming }}>
+                    <TvShowsContext.Provider value={{ tvShows, setTvShows }}>
+                      <UpcomingCopyContext.Provider
+                        value={{ upcomingCopy, setUpcomingCopy }}
                       >
-                        {children}
-                      </TopRatedCopyContext.Provider>
-                    </UpcomingCopyContext.Provider>
-                  </TvShowsContext.Provider>
-                </UpcomingContext.Provider>
-              </TopRatedContext.Provider>
-            </MovieContext.Provider>
-          </LocationContext.Provider>
-        </KeyContext>
-      </VisibilityContext>
+                        <TopRatedCopyContext.Provider
+                          value={{ topRatedCopy, setTopRatedCopy }}
+                        >
+                          {children}
+                        </TopRatedCopyContext.Provider>
+                      </UpcomingCopyContext.Provider>
+                    </TvShowsContext.Provider>
+                  </UpcomingContext.Provider>
+                </TopRatedContext.Provider>
+              </MovieContext.Provider>
+            </LocationContext.Provider>
+          </KeyContext>
+        </VisibilityContext>
+      </TrailerContext.Provider>
     </>
   );
 }

@@ -3,13 +3,14 @@ import MovieDetailsCard from "./MovieDetailsCard";
 import { useParams } from "react-router-dom";
 import { getMovieById, getVideo, getTvShowById } from "../Api/FetchRequest";
 import { useCurrentKey } from "../ContextProvider/ContextProvider";
-
+import { useCurrentTrailer } from "../ContextProvider/ContextProvider";
 function MovieDetails() {
   const { id } = useParams();
   const { setKey } = useCurrentKey();
   const [movieDetails, setMovieDetails] = useState();
   const [trailers, setTrailers] = useState();
   const [trailerId, setTrailerId] = useState();
+  const { hastrailer, setHasTrailer } = useCurrentTrailer();
   const currentLocation = window.location.pathname;
 
   //*Handles the filterig og movies and tv shows
@@ -40,8 +41,9 @@ function MovieDetails() {
 
       if (filter.length > 0) {
         setTrailerId(filter[0].key);
+        setHasTrailer(true);
       } else {
-        console.log("No Videos");
+        setHasTrailer(false);
       }
     }
   }, [trailers]);

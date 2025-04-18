@@ -45,7 +45,7 @@ function MovieDetailsCard({
             className="h-15 p-2 hover:opacity-50 cursor-pointer"
           ></img>
         </Nav>
-        {visible && <Trailer id={key} />}
+        {visible && <Trailer trailer={key} />}
 
         <div>
           <Poster
@@ -67,20 +67,20 @@ function MovieDetailsCard({
 
 const Nav = ({ children }) => {
   const navigate = useNavigate();
-  const { key } = useCurrentKey();
   const { setVisible } = useVisibility();
+
   const navigateBack = () => {
     const currentLocation = window.location.pathname.split("/");
     const getRoot = currentLocation[1];
 
-    if (Number(getRoot)) {
+    if (!currentLocation[0] && Number(currentLocation[1])) {
       navigate("/");
     } else {
       navigate(`/${getRoot}`);
     }
     setVisible(false);
-    setKey("");
   };
+
   return (
     <section
       className="flex  items-center justify-between p-5 "
@@ -90,7 +90,7 @@ const Nav = ({ children }) => {
     </section>
   );
 };
-
+//! Handles the rendering of the poster including the title, the vote ,release date, votes ,concept (genre),
 const Poster = ({
   poster,
   title,
@@ -136,6 +136,7 @@ const Synopsis = ({ overview, title }) => {
 };
 
 const Genres = ({ genre }) => {
+  //* Maps the genre and turn it into a
   const concepts = genre.map((movie, index) =>
     index + 1 !== genre.length ? (
       <p className="font-medium" key={index}>

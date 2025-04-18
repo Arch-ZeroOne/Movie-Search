@@ -20,8 +20,8 @@ function CastCard(props) {
 
   useEffect(() => {
     if (casts) {
-      const generateCard = casts.map((cast) => (
-        <div className="flex flex-col gap-3 w-50">
+      const generateCard = casts.map((cast, index) => (
+        <div className="flex flex-col gap-3 w-50" key={index}>
           <img
             src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
             className="h-80 full"

@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import {
   useMovie,
@@ -13,15 +13,18 @@ import {
 const Searchbar = ({ current_place }) => {
   //Used the context from the states in the app
   //When the context is changed here it automatically affects the context in the main file in short: It updates
-  const { movies, setMovies } = useMovie();
-  const { topRated, setTopRated } = useTopRated();
-  const { upcoming, setUpcoming } = useUpcoming();
-  const { tvShows, setTvShows } = useTvShows();
+  const { setMovies } = useMovie();
+  const { setTopRated } = useTopRated();
+  const { setUpcoming } = useUpcoming();
+  const { setTvShows } = useTvShows();
+  const { pathname } = useLocation();
 
   const [inputValue, setIputValue] = useState("");
 
   const { topRatedCopy } = useTopRatedCopy();
   const { upcomingCopy } = useUpcomingCopy();
+
+  console.log(pathname);
 
   const handleChange = (event) => {
     setIputValue(event.target.value);
@@ -39,7 +42,9 @@ const Searchbar = ({ current_place }) => {
         case "Movies":
           url = `https://api.themoviedb.org/3/search/movie?query=${inputValue}&include_adult=false&language=en-US&page=1`;
           break;
+
         case "Home":
+          console.log(inputValue);
           //*Updating the title values to lowercase
           lowercased = topRatedCopy.map((item) => ({
             ...item,
@@ -50,7 +55,7 @@ const Searchbar = ({ current_place }) => {
           filtered = lowercased.filter((item) =>
             item.title.includes(inputValue.toLowerCase())
           );
-
+          console.log(filtered);
           setTopRated(filtered);
           break;
 
@@ -113,7 +118,7 @@ const Searchbar = ({ current_place }) => {
           }
         });
     }
-  }, [inputValue]);
+  }, [inputValue, pathname]);
 
   return (
     <div className="w-[80%] text-white p-5 text-sm">

@@ -104,6 +104,10 @@ const Poster = ({
   vote_average,
   concept,
 }) => {
+  const date = new Date(release_date);
+  const split = String(date).split(" ");
+  const formattedDate = `${split[1]} ${split[2]} ${split[3]}`;
+
   return (
     <div className="flex p-8   items-center justify-center gap-5 flex-col md:flex-row md:justify-between  ">
       <div className="flex flex-col gap-5 items-center md:flex-row ">
@@ -121,7 +125,7 @@ const Poster = ({
             </span>
             <span className="flex items-center gap-2">
               <img src={release} alt="Release" className="h-6" />
-              <p className="font-medium">{release_date}</p>
+              <p className="font-medium">{formattedDate}</p>
             </span>
             <Genres genre={concept} />
           </div>

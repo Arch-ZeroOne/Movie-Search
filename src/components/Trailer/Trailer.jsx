@@ -35,16 +35,19 @@ function Trailer({ trailer }) {
   return (
     <>
       {hastrailer && (
-        <div className="w-[80%] h-300 flex absolute top-10 right-30 flex-col ">
+        <div className="flex absolute top-10  flex-col w-[80%]">
           <i
             className=" fa-solid fa-right-from-bracket text-3xl cursor-pointer text-red-600 self-end hover:opacity-50"
             onClick={changeVisibility}
           ></i>
+
           <iframe
             src={trailer_key}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            className="h-100 w-full "
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            className="w-full h-100 md:h-130"
           ></iframe>
         </div>
       )}

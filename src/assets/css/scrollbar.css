@@ -1,16 +1,13 @@
-body {
-  scrollbar-width: none;
-}
-
+/*Needed to be declared or else the scrollbar style wont apply*/
+/*Overrides the native appearance of the arrows*/
 ::-webkit-scrollbar {
-  border-radius: 20px;
-  background-color: black;
+  height: 10px; /*Affects only the horizontal scrollbar*/
 }
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb:horizontal {
   background-color: yellow;
   border-radius: 20px;
 }
-::-webkit-scrollbar-track {
-  background-color: black;
+::-webkit-scrollbar-track:horizontal {
   border-radius: 20px;
+  background-color: grey;
 }

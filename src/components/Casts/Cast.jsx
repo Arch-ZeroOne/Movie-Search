@@ -2,6 +2,7 @@ import React from "react";
 import CastCard from "./CastCard";
 import { getMovieCast } from "../Api/FetchRequest";
 import { useEffect, useState } from "react";
+
 function Cast({ id }) {
   const [cast, setCasts] = useState();
   useEffect(() => {
@@ -13,7 +14,7 @@ function Cast({ id }) {
   }, [id]);
 
   return (
-    <div className="w-[90vw]  ml-auto mr-auto items-center flex p-5 overflow-x-auto overflow-y-hidden">
+    <div className="w-[98vw]  ml-auto mr-auto items-center flex p-5 overflow-x-auto overflow-y-hidden">
       <CastCard {...cast} />
     </div>
   );

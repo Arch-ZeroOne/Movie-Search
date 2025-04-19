@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getMovieById, getVideo, getTvShowById } from "../Api/FetchRequest";
 import { useCurrentKey } from "../ContextProvider/ContextProvider";
 import { useCurrentTrailer } from "../ContextProvider/ContextProvider";
+import ScrollToTop from "../Scroll/ScrollToTop";
 function MovieDetails() {
   //* Gets the dynamic id in the browser url
   const { id } = useParams();
@@ -65,6 +66,7 @@ function MovieDetails() {
 
   return (
     <div>
+      <ScrollToTop />
       {movieDetails && (
         <MovieDetailsCard
           key={movieDetails.id}

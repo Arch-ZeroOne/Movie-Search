@@ -1,5 +1,5 @@
 import React from "react";
-
+import noImage from "/fallbacks/no-image.jpg";
 function TvShowsCard({ poster_path, name }) {
   return (
     <div className=" text-white font-[Jetbrains_Mono]  text-center">
@@ -10,7 +10,7 @@ function TvShowsCard({ poster_path, name }) {
             className="w-auto h-[100%]"
           />
         ) : (
-          <img src="public/no_poster/poster_error.jpg" alt="poster_error"></img>
+          <img src={noImage} alt="poster_error"></img>
         )}
         <h2>{name}</h2>
       </div>

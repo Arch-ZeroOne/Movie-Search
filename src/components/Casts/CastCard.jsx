@@ -1,5 +1,6 @@
 import React, { use } from "react";
 import { useEffect, useState } from "react";
+import noCast from "/fallbacks/no-image.jpg";
 function CastCard(props) {
   const [casts, setCasts] = useState();
   const [card, setCard] = useState();
@@ -22,10 +23,14 @@ function CastCard(props) {
     if (casts) {
       const generateCard = casts.map((cast, index) => (
         <div className="flex flex-col gap-3 w-50" key={index}>
-          <img
-            src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
-            className="h-80 full"
-          ></img>
+          {cast.profile_path ? (
+            <img
+              src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
+              className="h-80 full"
+            ></img>
+          ) : (
+            <img src={noCast} className="h-80 full"></img>
+          )}
           <div className="flex flex-col text-lg">
             <h2>{cast.name} as</h2>
 

@@ -134,11 +134,9 @@ const Poster = ({
 };
 const Synopsis = ({ overview, title }) => {
   return (
-    <div className="flex flex-col p-5 gap-2 items-center md:items-start ">
-      <h1 className="font-bold text-3xl">{title} Synopsis:</h1>
-      <p className="font-medium w-[50%] p-1 text-md text-center md:text-left">
-        {overview}
-      </p>
+    <div className="flex flex-col p-5 gap-2  md:items-start  md:w-[55%]">
+      <h1 className="font-bold text-2xl md:text-3xl">{title} Synopsis:</h1>
+      <p className="font-medium w-full p-1 text-sm md:text-lg ">{overview}</p>
     </div>
   );
 };

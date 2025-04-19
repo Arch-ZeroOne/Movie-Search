@@ -1,5 +1,5 @@
 import React from "react";
-
+import noImage from "/fallbacks/no-image.jpg";
 function TopRatedCard({ poster_path, title }) {
   return (
     <div className=" text-white font-mono   text-center  ">
@@ -10,7 +10,7 @@ function TopRatedCard({ poster_path, title }) {
             className="w-auto h-[100%] "
           />
         ) : (
-          <img src="public/no_poster/poster_error.jpg" alt="poster_error"></img>
+          <img src={noImage} alt="poster_error"></img>
         )}
         <h2 className="text-xs">{title}</h2>
       </div>

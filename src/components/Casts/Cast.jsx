@@ -2,6 +2,7 @@ import React from "react";
 import CastCard from "./CastCard";
 import { getMovieCast } from "../Api/FetchRequest";
 import { useEffect, useState } from "react";
+
 function Cast({ id }) {
   const [cast, setCasts] = useState();
   useEffect(() => {

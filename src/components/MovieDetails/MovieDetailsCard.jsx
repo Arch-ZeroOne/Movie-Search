@@ -35,9 +35,9 @@ function MovieDetailsCard({
   return (
     <div className="text-white flex flex-col gap-2">
       <div
+        className="w-full h-screen"
         style={{
           backgroundImage: `linear-gradient(to right, rgb(0,0,0),transparent), url(${backdrop})`,
-          height: "700px",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
@@ -103,10 +103,10 @@ const Poster = ({
   concept,
 }) => {
   return (
-    <div className="flex p-5  gap-3 items-center justify-between">
-      <div className="flex gap-5 items-center">
+    <div className="flex p-5   items-center justify-center gap-2 flex-col md:flex-row md:justify-around  ">
+      <div className="flex flex-col gap-5 items-center md:flex-row ">
         <img src={poster} alt="Movie Poster" className="h-100 w-70 " />
-        <section className="flex flex-col gap-8 ">
+        <section className="flex flex-col gap-8 items-center justify-center ">
           <h1 className="font-bold text-4xl   ">{title}</h1>
           <div className="flex flex-col gap-5">
             <span className="flex items-center gap-2">
@@ -131,9 +131,11 @@ const Poster = ({
 };
 const Synopsis = ({ overview, title }) => {
   return (
-    <div className="flex flex-col p-5 gap-2">
+    <div className="flex flex-col p-5 gap-2 items-center md:items-start ">
       <h1 className="font-bold text-3xl">{title} Synopsis:</h1>
-      <p className="font-medium w-[70%] p-1 text-md">{overview}</p>
+      <p className="font-medium w-[70%] p-1 text-md text-center md:text-left">
+        {overview}
+      </p>
     </div>
   );
 };
@@ -161,21 +163,32 @@ const Genres = ({ genre }) => {
 };
 
 const WatchTrailer = () => {
-  const { visible, setVisible } = useVisibility();
+  const media = window.matchMedia("(max-width:640px)");
+  const [change, setChange] = useState(false);
+  const { setVisible } = useVisibility();
+
+  const checkMatch = (e) => {
+    if (e.matches) {
+      setChange(true);
+    } else {
+      setChange(false);
+    }
+  };
+  media.addEventListener("change", checkMatch);
 
   return (
     <div>
-      {visible ? (
+      {change ? (
         <div
-          className=" flex flex-col justify-center items-center h-25 w-28 bg-black shadow-2xl hover:opacity-50 cursor-pointer gap-3 rounded-lg"
+          className="text-white h-[20px] font-bold gap-2 p-2 flex items-center "
           onClick={() => setVisible(true)}
         >
-          <i className="fa-solid fa-play text-4xl"></i>
-          <h3 className="text-xs">Watch Trailer</h3>
+          <i className="fa-solid fa-play"></i>
+          <p>Watch Trailer</p>
         </div>
       ) : (
         <div
-          className="flex flex-col justify-center items-center h-25 w-28 bg-black shadow-2xl hover:opacity-50 cursor-pointer gap-3 rounded-lg"
+          className=" flex flex-col justify-center items-center h-25 w-28 bg-black shadow-2xl hover:opacity-50 cursor-pointer gap-3 rounded-lg"
           onClick={() => setVisible(true)}
         >
           <i className="fa-solid fa-play text-4xl"></i>

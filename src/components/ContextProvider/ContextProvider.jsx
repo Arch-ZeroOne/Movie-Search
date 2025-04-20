@@ -1,16 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
-import Trailer from "../Trailer/Trailer";
-
 const MovieContext = React.createContext();
 const TopRatedContext = React.createContext();
 const UpcomingContext = React.createContext();
 const TvShowsContext = React.createContext();
-const UpcomingCopyContext = React.createContext();
-const TopRatedCopyContext = React.createContext();
 const LocationContext = React.createContext();
 const KeyContext = React.createContext();
 const VisibilityContext = React.createContext();
 const TrailerContext = React.createContext();
+const FilteredUp = React.createContext();
+const FilteredTop = React.createContext();
+const InputValue = React.createContext();
 
 //* Custom Hooks for using the global context
 export const useMovie = () => {
@@ -25,12 +24,6 @@ export const useUpcoming = () => {
 export const useTvShows = () => {
   return useContext(TvShowsContext);
 };
-export const useUpcomingCopy = () => {
-  return useContext(UpcomingCopyContext);
-};
-export const useTopRatedCopy = () => {
-  return useContext(TopRatedCopyContext);
-};
 export const useCurrentLocation = () => {
   return useContext(LocationContext);
 };
@@ -43,46 +36,64 @@ export const useVisibility = () => {
 export const useCurrentTrailer = () => {
   return useContext(TrailerContext);
 };
+export const useFilteredUp = () => {
+  return useContext(FilteredUp);
+};
+export const useFilteredTop = () => {
+  return useContext(FilteredTop);
+};
+export const useValue = () => {
+  return useContext(InputValue);
+};
+
 //* Receives a children prop that contains what the context provider will wrap
 export default function StateContextProvider({ children }) {
   //* Global states
-  const [movies, setMovies] = useState([]);
-  const [topRated, setTopRated] = useState([]);
-  const [upcoming, setUpcoming] = useState([]);
-  const [tvShows, setTvShows] = useState([]);
-  const [upcomingCopy, setUpcomingCopy] = useState([]);
-  const [topRatedCopy, setTopRatedCopy] = useState([]);
   const [location, setLocation] = useState("");
   const [visible, setVisible] = useState(false);
   const [key, setKey] = useState("");
   const [hastrailer, setHasTrailer] = useState(false);
+
+  //*Movies and Tv shows
+  const [movies, setMovies] = useState([]);
+  const [topRated, setTopRated] = useState([]);
+  const [upcoming, setUpcoming] = useState([]);
+  const [tvShows, setTvShows] = useState([]);
+  const [filteredUp, setFilteredUp] = useState([]);
+  const [filteredTop, setFilteredTop] = useState([]);
+  const [inputValue, setInputValue] = useState();
+
   return (
     <>
-      <TrailerContext.Provider value={{ hastrailer, setHasTrailer }}>
-        <VisibilityContext value={{ visible, setVisible }}>
-          <KeyContext value={{ key, setKey }}>
-            <LocationContext.Provider value={{ location, setLocation }}>
-              <MovieContext.Provider value={{ movies, setMovies }}>
-                <TopRatedContext.Provider value={{ topRated, setTopRated }}>
-                  <UpcomingContext.Provider value={{ upcoming, setUpcoming }}>
-                    <TvShowsContext.Provider value={{ tvShows, setTvShows }}>
-                      <UpcomingCopyContext.Provider
-                        value={{ upcomingCopy, setUpcomingCopy }}
+      <InputValue.Provider value={{ inputValue, setInputValue }}>
+        <FilteredUp.Provider value={{ filteredUp, setFilteredUp }}>
+          <FilteredTop.Provider value={{ filteredTop, setFilteredTop }}>
+            <TrailerContext.Provider value={{ hastrailer, setHasTrailer }}>
+              <VisibilityContext value={{ visible, setVisible }}>
+                <KeyContext value={{ key, setKey }}>
+                  <LocationContext.Provider value={{ location, setLocation }}>
+                    <MovieContext.Provider value={{ movies, setMovies }}>
+                      <TopRatedContext.Provider
+                        value={{ topRated, setTopRated }}
                       >
-                        <TopRatedCopyContext.Provider
-                          value={{ topRatedCopy, setTopRatedCopy }}
+                        <UpcomingContext.Provider
+                          value={{ upcoming, setUpcoming }}
                         >
-                          {children}
-                        </TopRatedCopyContext.Provider>
-                      </UpcomingCopyContext.Provider>
-                    </TvShowsContext.Provider>
-                  </UpcomingContext.Provider>
-                </TopRatedContext.Provider>
-              </MovieContext.Provider>
-            </LocationContext.Provider>
-          </KeyContext>
-        </VisibilityContext>
-      </TrailerContext.Provider>
+                          <TvShowsContext.Provider
+                            value={{ tvShows, setTvShows }}
+                          >
+                            {children}
+                          </TvShowsContext.Provider>
+                        </UpcomingContext.Provider>
+                      </TopRatedContext.Provider>
+                    </MovieContext.Provider>
+                  </LocationContext.Provider>
+                </KeyContext>
+              </VisibilityContext>
+            </TrailerContext.Provider>
+          </FilteredTop.Provider>
+        </FilteredUp.Provider>
+      </InputValue.Provider>
     </>
   );
 }

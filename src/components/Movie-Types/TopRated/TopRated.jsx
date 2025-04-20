@@ -3,22 +3,25 @@ import { getTopRated } from "../../Api/FetchRequest";
 import { Link } from "react-router-dom";
 import {
   useTopRated,
-  useTopRatedCopy,
+  useValue,
+  useFilteredTop,
 } from "../../ContextProvider/ContextProvider";
 
 import TopRatedCard from "./TopRatedCard";
 const TopRated = () => {
   const { topRated, setTopRated } = useTopRated();
-  const { setTopRatedCopy } = useTopRatedCopy();
-
+  const { inputValue } = useValue();
+  const { setFilteredTop } = useFilteredTop();
   useEffect(() => {
-    const topRated = async () => {
-      const topRate = await getTopRated();
-      setTopRated(topRate.results);
-      setTopRatedCopy(topRate.results);
-    };
-    topRated();
-  }, []);
+    if (!inputValue) {
+      const topRated = async () => {
+        const topRate = await getTopRated();
+        setTopRated(topRate.results);
+        setFilteredTop(topRate.results);
+      };
+      topRated();
+    }
+  }, [inputValue]);
 
   return (
     <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">

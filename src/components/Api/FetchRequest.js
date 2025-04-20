@@ -20,6 +20,23 @@ export async function getMovies() {
     return convert;
   }
 }
+export async function searchMovie(query) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
+  };
+
+  const request = await fetch(
+    `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
+    options
+  );
+  if (request.ok) {
+    return await request.json();
+  }
+}
 
 export async function getTopRated() {
   const options = {
@@ -71,13 +88,31 @@ export async function getTvShows() {
   };
 
   const request = await fetch(
-    "https://api.themoviedb.org/3/discover/tv",
+    "https://api.themoviedb.org/3/trending/tv/day?language=en-US",
     options
   );
 
   if (request.ok) {
     const convert = await request.json();
     return convert;
+  }
+}
+
+export async function searchTv(query) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
+  };
+
+  const request = await fetch(
+    `https://api.themoviedb.org/3/search/tv?query=${query}&include_adult=false&language=en-US&page=1`,
+    options
+  );
+  if (request.ok) {
+    return await request.json();
   }
 }
 

@@ -16,7 +16,7 @@ const BrowserPath = () => {
       case "/Upcoming":
         setLocation("Upcoming");
         break;
-      case "Tvshows":
+      case "/Tvshows":
         setLocation("TV Shows");
         break;
     }

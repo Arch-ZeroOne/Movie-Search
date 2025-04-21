@@ -24,6 +24,7 @@ const MainPage = () => {
     >
       <div>
         <BrowserPath />
+        <Localstorage />
       </div>
       <Routes>
         <Route

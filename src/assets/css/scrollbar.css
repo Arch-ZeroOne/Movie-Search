@@ -2,9 +2,15 @@
 /*Overrides the native appearance of the arrows*/
 ::-webkit-scrollbar {
   height: 10px; /*Affects only the horizontal scrollbar*/
+  width: 8px;
 }
+
 ::-webkit-scrollbar-thumb:horizontal {
   background-color: yellow;
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:vertical {
+  background-color: #0d2c54;
   border-radius: 20px;
 }
 ::-webkit-scrollbar-track:horizontal {

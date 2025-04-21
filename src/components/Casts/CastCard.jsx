@@ -1,33 +1,20 @@
 import React, { use } from "react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import noCast from "/fallbacks/no-image.jpg";
 function CastCard(props) {
   const [casts, setCasts] = useState();
   const [card, setCard] = useState();
-  const location = useLocation().pathname.split("/");
-
-  const getCast = location[1] === "Movies" ? props.cast : props.episodes;
+  const getCast = props.cast;
   useEffect(() => {
     if (getCast) {
-      if (location[1] === "Movies") {
-        const filterCast = getCast.map((item) => {
-          return {
-            name: item.name,
-            character: item.character,
-            profile_path: item.profile_path,
-          };
-        });
-        setCasts(filterCast);
-      } else {
-        console.log(getCast);
-        const filterCast = getCast.map((item) => {
-          console.log(item.crew);
-        });
-        setCasts(filterCast);
-
-        console.log(filterCast);
-      }
+      const filterCast = getCast.map((item) => {
+        return {
+          name: item.name,
+          character: item.character,
+          profile_path: item.profile_path,
+        };
+      });
+      setCasts(filterCast);
     }
   }, [getCast]);
 

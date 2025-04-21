@@ -13,6 +13,11 @@ function Trailer({ trailer }) {
   //! Takes on the embedded video
   const trailer_key = `https://www.youtube.com/embed/${trailer}`;
 
+  //! Closes the modal using the exit icon
+  const changeVisibility = () => {
+    setVisible(false);
+  };
+
   //! Triggers when the hasTrailer global state is fale
   if (!hastrailer) {
     //! Fires the modal
@@ -21,15 +26,7 @@ function Trailer({ trailer }) {
       text: "No trailer is available for this movie",
       icon: "error",
     });
-
-    //! Hides the embedded youtube video
-    setVisible(false);
   }
-
-  //! Closes the modal using the exit icon
-  const changeVisibility = () => {
-    setVisible(false);
-  };
 
   //! Returns the dynamic youtube video using iframe
   return (

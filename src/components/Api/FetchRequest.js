@@ -218,7 +218,7 @@ export async function getTvCasts(series_id) {
   };
 
   const request = await fetch(
-    `https://api.themoviedb.org/3/tv/${series_id}/season/1`,
+    `https://api.themoviedb.org/3/tv/${series_id}/credits`,
     options
   );
 
@@ -239,6 +239,25 @@ export async function getSimilarMovies(movie_id) {
     `https://api.themoviedb.org/3/movie/${movie_id}/similar`,
     options
   );
+  if (request.ok) {
+    return await request.json();
+  }
+}
+
+export async function getSimilarTv(tv_id) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
+  };
+
+  const request = await fetch(
+    `https://api.themoviedb.org/3/tv/${tv_id}/similar`,
+    options
+  );
+
   if (request.ok) {
     return await request.json();
   }

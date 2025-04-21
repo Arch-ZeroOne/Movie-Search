@@ -16,26 +16,26 @@ const TvDetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    const get_tv_details = async () => {
+    const getTvDetails = async () => {
       const request = await getTvShowById(id);
       setTv(request);
     };
-    get_tv_details();
+    getTvDetails();
   }, [id]);
 
   useEffect(() => {
-    const get_tv_video = async () => {
+    const getTvVideo = async () => {
       const request = await getTvShowTrailer(id);
       setVideo(request.results);
     };
 
-    get_tv_video();
+    getTvVideo();
   }, [id]);
 
   useEffect(() => {
     if (video) {
       const filterTrailer = video.filter((tv) => tv.type === "Trailer");
-      if (filterTrailer[0].length > 0) {
+      if (filterTrailer[0]) {
         setKey(filterTrailer[0].key);
         setHasTrailer(true);
       } else {

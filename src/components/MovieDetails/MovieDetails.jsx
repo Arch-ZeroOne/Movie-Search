@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { getMovieById, getMovieTrailer } from "../Api/FetchRequest";
 import { useCurrentKey } from "../ContextProvider/ContextProvider";
 import { useCurrentTrailer } from "../ContextProvider/ContextProvider";
 import ScrollToTop from "../Scroll/ScrollToTop";
 import MovieDetailsCard from "./MovieDetailsCard";
+
 function MovieDetails() {
   //* Gets the dynamic id in the browser url
   const { id } = useParams();
   //* Gets the current movie key
   const { setKey } = useCurrentKey();
+  //*Gets the current browser route
+  const pathname = useLocation().pathname.split("/");
   //* Gets the current Trailer
   const { setHasTrailer } = useCurrentTrailer();
-
   const [movieDetails, setMovieDetails] = useState();
   const [trailers, setTrailers] = useState();
   const [trailerId, setTrailerId] = useState();
+
+  const get_movie_trailer = async () => {
+    const vidDetails = await getMovieTrailer(id);
+    setTrailers(vidDetails.results);
+  };
 
   //*Handles the filtering of movies and tv shows
   useEffect(() => {
@@ -28,18 +35,14 @@ function MovieDetails() {
 
   //* Handles the request of movies  trailers
   useEffect(() => {
-    const getMovieTrailer = async () => {
-      const vidDetails = await getMovieTrailer(id);
-      setTrailers(vidDetails.results);
-    };
-    getMovieTrailer;
+    get_movie_trailer();
   }, [id]);
 
   //* Filters the trailer and getting the first one
   useEffect(() => {
     if (trailers) {
       const filter = trailers.filter((trailer) => trailer.type === "Trailer");
-
+      console.log(filter);
       //* Checks if the trailer is empty
       if (filter.length > 0) {
         setTrailerId(filter[0].key);

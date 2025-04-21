@@ -151,7 +151,7 @@ export async function getTvShowById(show_id) {
     return await request.json();
   }
 }
-export async function getVideo(movie_id) {
+export async function getMovieTrailer(movie_id) {
   const options = {
     method: "GET",
     headers: {
@@ -162,6 +162,25 @@ export async function getVideo(movie_id) {
 
   const request = await fetch(
     `https://api.themoviedb.org/3/movie/${movie_id}/videos`,
+    options
+  );
+
+  if (request.ok) {
+    return await request.json();
+  }
+}
+
+export async function getTvShowTrailer(tv_id) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
+  };
+
+  const request = await fetch(
+    `https://api.themoviedb.org/3/tv/${tv_id}/videos`,
     options
   );
 
@@ -181,6 +200,25 @@ export async function getMovieCast(movie_id) {
 
   const request = await fetch(
     `https://api.themoviedb.org/3/movie/${movie_id}/credits`,
+    options
+  );
+
+  if (request.ok) {
+    return await request.json();
+  }
+}
+
+export async function getTvCasts(series_id) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: accessToken,
+    },
+  };
+
+  const request = await fetch(
+    `https://api.themoviedb.org/3/tv/${series_id}/season/1`,
     options
   );
 

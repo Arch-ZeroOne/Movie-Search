@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React from "react";
 import { getSimilarMovies } from "../Api/FetchRequest.js";
 import { useEffect, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";

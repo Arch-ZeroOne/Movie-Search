@@ -4,9 +4,10 @@ import Navbars from "./Navbars";
 import Movies from "./Movie-Types/Movies/Movies";
 import TopRated from "./Movie-Types/TopRated/TopRated";
 import TvShows from "./Movie-Types/TvShows/TvShows";
-import MovieDetails from "./MovieDetails/MovieDetails";
 import UpcomingMovies from "./Movie-Types/UpcomingMovies/UpcomingMovies";
 import BrowserPath from "./Browser/BrowserPath";
+import MovieDetails from "./MovieDetails/MovieDetails";
+import TvDetails from "./TvShowDetails/TvDetails";
 import Localstorage from "./Localstorage/Localstorage";
 import { Routes, Route } from "react-router-dom";
 import { motion } from "motion/react";
@@ -22,7 +23,6 @@ const MainPage = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div>
-        <Localstorage />
         <BrowserPath />
       </div>
       <Routes>
@@ -84,7 +84,7 @@ const MainPage = () => {
         <Route path="/:id" element={<MovieDetails />} />
         <Route path="/Movies/:id" element={<MovieDetails />} />
         <Route path="/Upcoming/:id" element={<MovieDetails />} />
-        <Route path="/Tvshows/:id" element={<MovieDetails />} />
+        <Route path="/Tvshows/:id" element={<TvDetails />} />
         <Route path="/Details/:id" element={<MovieDetails />} />
       </Routes>
     </motion.div>

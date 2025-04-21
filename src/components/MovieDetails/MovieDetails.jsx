@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import MovieDetailsCard from "./MovieDetailsCard";
 import { useParams } from "react-router-dom";
-import { getMovieById, getVideo, getTvShowById } from "../Api/FetchRequest";
+import { getMovieById, getMovieTrailer } from "../Api/FetchRequest";
 import { useCurrentKey } from "../ContextProvider/ContextProvider";
 import { useCurrentTrailer } from "../ContextProvider/ContextProvider";
 import ScrollToTop from "../Scroll/ScrollToTop";
+import MovieDetailsCard from "./MovieDetailsCard";
 function MovieDetails() {
   //* Gets the dynamic id in the browser url
   const { id } = useParams();
@@ -17,29 +17,22 @@ function MovieDetails() {
   const [trailers, setTrailers] = useState();
   const [trailerId, setTrailerId] = useState();
 
-  const currentLocation = window.location.pathname;
-
-  //*Handles the filtering og movies and tv shows
+  //*Handles the filtering of movies and tv shows
   useEffect(() => {
-    const getDetails = async () => {
-      if (currentLocation.includes("tvshows")) {
-        const details = await getTvShowById(id);
-        setMovieDetails(details);
-      } else {
-        const details = await getMovieById(id);
-        setMovieDetails(details);
-      }
+    const getMovieDetails = async () => {
+      const details = await getMovieById(id);
+      setMovieDetails(details);
     };
-    getDetails();
+    getMovieDetails();
   }, [id]);
 
-  //* Handles the request of movies
+  //* Handles the request of movies  trailers
   useEffect(() => {
-    const getVideoDetails = async () => {
-      const vidDetails = await getVideo(id);
+    const getMovieTrailer = async () => {
+      const vidDetails = await getMovieTrailer(id);
       setTrailers(vidDetails.results);
     };
-    getVideoDetails();
+    getMovieTrailer;
   }, [id]);
 
   //* Filters the trailer and getting the first one

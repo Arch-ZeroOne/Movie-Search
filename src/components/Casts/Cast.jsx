@@ -1,16 +1,27 @@
 import React from "react";
 import CastCard from "./CastCard";
-import { getMovieCast } from "../Api/FetchRequest";
+import { getMovieCast, getTvCasts } from "../Api/FetchRequest";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function Cast({ id }) {
   const [cast, setCasts] = useState();
+  const location = useLocation().pathname.split("/");
+
   useEffect(() => {
-    const requestCast = async () => {
-      const cast = await getMovieCast(id);
-      setCasts(cast);
-    };
-    requestCast();
+    if (location[1] === "Tvshows") {
+      const requestCast = async () => {
+        const cast = await getTvCasts(id);
+        setCasts(cast);
+      };
+      requestCast();
+    } else {
+      const requestCast = async () => {
+        const cast = await getMovieCast(id);
+        setCasts(cast);
+      };
+      requestCast();
+    }
   }, [id]);
 
   return (

@@ -1,13 +1,14 @@
 import React, { use, useEffect, useState } from "react";
-import human from "../../../public/images/3d-movie.png";
-import like from "../../../public/images/like.png";
-import release from "../../../public/images/video-player.png";
-import rating from "../../../public/images/star.png";
-import closeBig from "../../../public/close/close-big.png";
-import { useNavigate, useParams } from "react-router-dom";
+import human from "/images/3d-movie.png";
+import like from "/images/like.png";
+import release from "/images/video-player.png";
+import rating from "/images/star.png";
 import Cast from "../Casts/Cast";
-import closeSmall from "../../../public/close/close-small.png";
+import closeSmall from "/close/close-small.png";
+import closeBig from "/close/close-big.png";
 import SimilarMovies from "../SimilarMovies/SimilarMovies";
+import { useNavigate } from "react-router-dom";
+
 import {
   useCurrentKey,
   useVisibility,

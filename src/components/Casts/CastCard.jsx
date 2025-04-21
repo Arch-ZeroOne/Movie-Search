@@ -8,8 +8,6 @@ function CastCard(props) {
   const location = useLocation().pathname.split("/");
 
   const getCast = location[1] === "Movies" ? props.cast : props.episodes;
-
-  console.log(getCast);
   useEffect(() => {
     if (getCast) {
       if (location[1] === "Movies") {
@@ -22,7 +20,13 @@ function CastCard(props) {
         });
         setCasts(filterCast);
       } else {
-        
+        console.log(getCast);
+        const filterCast = getCast.map((item) => {
+          console.log(item.crew);
+        });
+        setCasts(filterCast);
+
+        console.log(filterCast);
       }
     }
   }, [getCast]);
@@ -41,7 +45,6 @@ function CastCard(props) {
           )}
           <div className="flex flex-col text-lg">
             <h2>{cast.name} as</h2>
-
             <h2>{cast.character}</h2>
           </div>
         </div>

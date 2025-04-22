@@ -1,19 +1,24 @@
 /*Needed to be declared or else the scrollbar style wont apply*/
 /*Overrides the native appearance of the arrows*/
-::-webkit-scrollbar {
-  height: 10px; /*Affects only the horizontal scrollbar*/
-  width: 8px;
+.scrollbar-custom {
+  scrollbar-width: auto;
+  scrollbar-color: yellow;
 }
-
-::-webkit-scrollbar-thumb:horizontal {
+.scrollbar-custom::-webkit-scrollbar {
+  scrollbar-width: auto;
+  scrollbar-color: yellow;
+}
+.scrollbar-custom::-webkit-scrollbar-track:horizontal {
+  background-color: black;
+  border-radius: 15px;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb:horizontal {
   background-color: yellow;
   border-radius: 20px;
 }
-::-webkit-scrollbar-thumb:vertical {
-  background-color: #0d2c54;
-  border-radius: 20px;
-}
-::-webkit-scrollbar-track:horizontal {
-  border-radius: 20px;
-  background-color: grey;
+.scrollbar-custom::-webkit-scrollbar-button:increment {
+  height: 12px;
+  width: 12px;
+  background-color: yellow;
+  border-radius: 6px;
 }

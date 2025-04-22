@@ -42,7 +42,7 @@ function MovieDetails() {
   useEffect(() => {
     if (trailers) {
       const filter = trailers.filter((trailer) => trailer.type === "Trailer");
-      console.log(filter);
+
       //* Checks if the trailer is empty
       if (filter.length > 0) {
         setTrailerId(filter[0].key);

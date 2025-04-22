@@ -33,7 +33,7 @@ const MainPage = () => {
             <div className="flex flex-col justify-items-center items-center gap-5">
               <Searchbar current_place={location} />
               <Navbars />
-              <h1 className="text-white font-mono  text-lg md:text-left">
+              <h1 className="text-white font-[Winky_Rough]  text-[18px] md:text-left">
                 {location}
               </h1>
               <TopRated />
@@ -47,7 +47,7 @@ const MainPage = () => {
             <div className="flex flex-col justify-items-center items-center gap-5">
               <Searchbar current_place={location} />
               <Navbars />
-              <h1 className="text-white font-mono  text-lg md:text-left">
+              <h1 className="text-white font-[Winky_Rough]  text-[18px] md:text-left">
                 {location}
               </h1>
               <Movies />
@@ -61,7 +61,7 @@ const MainPage = () => {
             <div className="flex flex-col justify-items-center items-center gap-5">
               <Searchbar current_place={location} />
               <Navbars />
-              <h1 className="text-white font-mono  text-lg md:text-left">
+              <h1 className="text-white font-[Winky_Rough]  text-[17px] md:text-left">
                 {location}
               </h1>
               <UpcomingMovies />
@@ -74,7 +74,7 @@ const MainPage = () => {
             <div className="flex flex-col justify-items-center items-center gap-5">
               <Searchbar current_place={location} />
               <Navbars />
-              <h1 className="text-white font-mono  text-lg md:text-left">
+              <h1 className="text-white font-[Winky_Rough]  text-[17px] md:text-left">
                 {location}
               </h1>
               <TvShows />

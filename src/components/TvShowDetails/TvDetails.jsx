@@ -51,7 +51,7 @@ const TvDetails = () => {
         <MovieDetailsCard
           key={tv.id}
           backdrop_path={tv.backdrop_path}
-          title={tv.title}
+          title={tv.name}
           poster_path={tv.poster_path}
           overview={tv.overview}
           vote_count={tv.vote_count}

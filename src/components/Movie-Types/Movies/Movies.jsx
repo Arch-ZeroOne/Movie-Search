@@ -18,7 +18,7 @@ function Movies() {
 
   return (
     <>
-      <div className="grid grid-cols-1 justify-items-center gap-10 cards w-full text-sm sm:grid-cols-2 max-sm:grid-cols-1 md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
+      <div className="grid grid-cols-2 justify-items-center gap-10 cards w-full text-sm   md:max-lg:grid-cols-3 lg:grid-cols-4   xl:grid-cols-5 ">
         {movies &&
           movies.map((movie) => (
             <Link to={`/Movies/${movie.id}`} key={movie.id}>

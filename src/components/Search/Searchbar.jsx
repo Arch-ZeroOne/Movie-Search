@@ -58,7 +58,7 @@ const Searchbar = ({ current_place }) => {
       <input
         type="text"
         placeholder={`Search in ${current_place}`}
-        className="bg-[#1F2937] mr-auto ml-auto font-mono w-full p-3 rounded-lg text-sm max-sm:text-center"
+        className="bg-[#1F2937] mr-auto ml-auto font-[Winky_Rough] w-full p-3 rounded-lg  text-[16px]   max-sm:text-center"
         onChange={handleChange}
       />
     </div>

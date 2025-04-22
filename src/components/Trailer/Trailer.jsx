@@ -32,12 +32,11 @@ function Trailer({ trailer }) {
   return (
     <>
       {hastrailer && (
-        <div className="flex absolute top-10  flex-col w-[80%]">
+        <div className="h-80   flex absolute top-50 md:top-10   md:h-full flex-col  lg:w-[90%] xl:w-[65%]  w-[80%]">
           <i
-            className=" fa-solid fa-right-from-bracket text-3xl cursor-pointer text-red-600 self-end hover:opacity-50"
+            className=" fa-solid fa-right-from-bracket text-3xl cursor-pointer text-red-600 self-end hover:opacity-50 absolute top-3  "
             onClick={changeVisibility}
           ></i>
-
           <iframe
             src={trailer_key}
             allowFullScreen

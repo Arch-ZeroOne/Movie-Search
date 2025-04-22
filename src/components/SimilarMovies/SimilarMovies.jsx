@@ -49,10 +49,17 @@ const SimilarMovies = () => {
         {similar &&
           similar.map((movie) => (
             <Link to={`${path}/${movie.id}`} key={movie.id}>
-              <SimilarMoviesCard
-                title={movie.title}
-                poster_path={movie.poster_path}
-              />
+              {movie.title ? (
+                <SimilarMoviesCard
+                  title={movie.title}
+                  poster_path={movie.poster_path}
+                />
+              ) : (
+                <SimilarMoviesCard
+                  title={movie.name}
+                  poster_path={movie.poster_path}
+                />
+              )}
             </Link>
           ))}
       </div>

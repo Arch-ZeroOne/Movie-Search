@@ -1,12 +1,11 @@
 import React, { use, useEffect, useState } from "react";
-import human from "/images/3d-movie.png";
 import like from "/images/like.png";
 import release from "/images/video-player.png";
 import rating from "/images/star.png";
 import Cast from "../Casts/Cast";
-import closeSmall from "/close/close-small.png";
-import closeBig from "/close/close-big.png";
+import Close from "../Close/Close";
 import SimilarMovies from "../SimilarMovies/SimilarMovies";
+import Loader from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -43,12 +42,7 @@ function MovieDetailsCard({
           backgroundSize: "cover",
         }}
       >
-        <Nav>
-          <img
-            src={closeSmall}
-            className="h-15 p-2 hover:opacity-50 cursor-pointer"
-          ></img>
-        </Nav>
+        <Nav />
         <div className="flex justify-center">
           {visible && <Trailer trailer={key} />}
         </div>
@@ -71,7 +65,7 @@ function MovieDetailsCard({
   );
 }
 
-const Nav = ({ children }) => {
+const Nav = () => {
   const navigate = useNavigate();
   const { setVisible } = useVisibility();
 
@@ -92,11 +86,12 @@ const Nav = ({ children }) => {
       className="flex  items-center justify-between p-5 "
       onClick={navigateBack}
     >
-      {children}
+      <Close />
+      <Loader />
     </section>
   );
 };
-//! Handles the rendering of the poster including the title, the vote ,release date, votes ,concept (genre),
+
 const Poster = ({
   poster,
   title,
@@ -132,7 +127,6 @@ const Poster = ({
           </div>
         </section>
       </div>
-
       <WatchTrailer />
     </div>
   );
@@ -183,7 +177,7 @@ const WatchTrailer = () => {
   media.addEventListener("change", checkMatch);
 
   return (
-    <>
+    <div className="font-[Winky_Rough]">
       {!visible && (
         <div>
           {change ? (
@@ -205,7 +199,7 @@ const WatchTrailer = () => {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 export default MovieDetailsCard;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { searchMovie, searchTv } from "../Api/FetchRequest";
 import {
   useMovie,
@@ -11,21 +11,19 @@ import {
 } from "../ContextProvider/ContextProvider";
 
 const Searchbar = ({ current_place }) => {
-  //Used the context from the states in the app
-  //When the context is changed here it automatically affects the context in the main file in short: It updates
-
   const { setMovies } = useMovie();
   const { setTopRated } = useTopRated();
   const { setUpcoming } = useUpcoming();
   const { setTvShows } = useTvShows();
-  const { filteredUp, setFilteredUp } = useFilteredUp();
-  const { filteredTop, setFilteredTop } = useFilteredTop();
+  const { filteredUp } = useFilteredUp();
+  const { filteredTop } = useFilteredTop();
   const { inputValue, setInputValue } = useValue();
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
 
+  //Handles the API request for searching movies
   useEffect(() => {
     if (inputValue) {
       const searchMovies = async () => {
@@ -40,6 +38,8 @@ const Searchbar = ({ current_place }) => {
       searchTvShow();
     }
   }, [inputValue]);
+
+  //Handles the filtering of state
   useEffect(() => {
     if (inputValue) {
       const filtered_top = filteredTop.filter((movie) =>

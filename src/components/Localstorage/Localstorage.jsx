@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 const LocalStorage = () => {
   const { pathname } = useLocation();
@@ -14,11 +14,11 @@ const LocalStorage = () => {
 
   //* Saving sessions to localstorage
   useEffect(() => {
-    if(pathname.split("/").length === 2){
+    const pathSplit = pathname.split("/");
+    if (pathSplit.length === 2 && !Number(pathSplit[1])) {
       const route = [{ route: pathname }];
       localStorage.setItem("Route", JSON.stringify(route));
     }
-
   }, [pathname]);
   return null;
 };

@@ -5,6 +5,7 @@ function CastCard(props) {
   const [casts, setCasts] = useState();
   const [card, setCard] = useState();
   const getCast = props.cast;
+
   useEffect(() => {
     if (getCast) {
       const filterCast = getCast.map((item) => {

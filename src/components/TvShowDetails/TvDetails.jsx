@@ -4,9 +4,11 @@ import { useParams } from "react-router-dom";
 import {
   useCurrentKey,
   useCurrentTrailer,
+  useLoader
 } from "../ContextProvider/ContextProvider";
 import ScrollToTop from "../Scroll/ScrollToTop";
 import MovieDetailsCard from "../MovieDetails/MovieDetailsCard";
+import Spinner from "../Spinner/Spinner";
 
 const TvDetails = () => {
   const [tv, setTv] = useState();
@@ -14,21 +16,25 @@ const TvDetails = () => {
   const { setHasTrailer } = useCurrentTrailer();
   const { setKey } = useCurrentKey();
   const { id } = useParams();
+  const {loading,setLoading} = useLoader();
 
   useEffect(() => {
+    setLoading(true);
     const getTvDetails = async () => {
       const request = await getTvShowById(id);
       setTv(request);
+      setLoading(false);
     };
     getTvDetails();
   }, [id]);
 
   useEffect(() => {
+    setLoading(true);
     const getTvVideo = async () => {
       const request = await getTvShowTrailer(id);
       setVideo(request.results);
+      setLoading(false);
     };
-
     getTvVideo();
   }, [id]);
 
@@ -46,6 +52,7 @@ const TvDetails = () => {
 
   return (
     <div>
+      {loading && <Spinner/>}
       <ScrollToTop />
       {tv && (
         <MovieDetailsCard

@@ -12,7 +12,7 @@ function Movies() {
   useEffect(() => {
     if (!inputValue) {
       setLoading(true);
-      const movie = async () => {
+        const movie = async () => {
         const movies = await getMovies();
         setMovies(movies.results);
         setLoading(false);

@@ -1,17 +1,17 @@
 import React from "react";
-import Searchbar from "./Search/Searchbar";
-import Navbars from "./Navbars";
-import Movies from "./Movie-Types/Movies/Movies";
-import TopRated from "./Movie-Types/TopRated/TopRated";
-import TvShows from "./Movie-Types/TvShows/TvShows";
-import UpcomingMovies from "./Movie-Types/UpcomingMovies/UpcomingMovies";
-import BrowserPath from "./Browser/BrowserPath";
-import MovieDetails from "./MovieDetails/MovieDetails";
-import TvDetails from "./TvShowDetails/TvDetails";
-import Localstorage from "./Localstorage/Localstorage";
+import Searchbar from "../Search/Searchbar.jsx";
+import Navbars from "./Navbars.jsx";
+import Movies from "../Movie-Types/Movies/Movies.jsx";
+import TopRated from "../Movie-Types/TopRated/TopRated.jsx";
+import TvShows from "../Movie-Types/TvShows/TvShows.jsx";
+import UpcomingMovies from "../Movie-Types/UpcomingMovies/UpcomingMovies.jsx";
+import BrowserPath from "../Browser/BrowserPath.jsx";
+import MovieDetails from "../MovieDetails/MovieDetails.jsx";
+import TvDetails from "../TvShowDetails/TvDetails.jsx";
+import Localstorage from "../Localstorage/Localstorage.jsx";
 import { Routes, Route } from "react-router-dom";
 import { motion } from "motion/react";
-import { useCurrentLocation } from "./ContextProvider/ContextProvider";
+import { useCurrentLocation } from "../ContextProvider/ContextProvider.jsx";
 
 const MainPage = () => {
   const { location } = useCurrentLocation();

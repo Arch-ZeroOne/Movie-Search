@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 const MovieContext = React.createContext();
 const TopRatedContext = React.createContext();
 const UpcomingContext = React.createContext();
@@ -10,6 +10,7 @@ const TrailerContext = React.createContext();
 const FilteredUp = React.createContext();
 const FilteredTop = React.createContext();
 const InputValue = React.createContext();
+const LoaderContext = React.createContext();
 
 //* Custom Hooks for using the global context
 export const useMovie = () => {
@@ -45,6 +46,9 @@ export const useFilteredTop = () => {
 export const useValue = () => {
   return useContext(InputValue);
 };
+export const useLoader = () => {
+  return useContext(LoaderContext);
+}
 
 //* Receives a children prop that contains what the context provider will wrap
 export default function StateContextProvider({ children }) {
@@ -53,6 +57,7 @@ export default function StateContextProvider({ children }) {
   const [visible, setVisible] = useState(false);
   const [key, setKey] = useState("");
   const [hastrailer, setHasTrailer] = useState(false);
+  const [loading,setLoading] = useState(false);
 
   //*Movies and Tv shows
   const [movies, setMovies] = useState([]);
@@ -65,6 +70,7 @@ export default function StateContextProvider({ children }) {
 
   return (
     <>
+      <LoaderContext.Provider value={{loading,setLoading}}>
       <InputValue.Provider value={{ inputValue, setInputValue }}>
         <FilteredUp.Provider value={{ filteredUp, setFilteredUp }}>
           <FilteredTop.Provider value={{ filteredTop, setFilteredTop }}>
@@ -94,6 +100,7 @@ export default function StateContextProvider({ children }) {
           </FilteredTop.Provider>
         </FilteredUp.Provider>
       </InputValue.Provider>
+      </LoaderContext.Provider>
     </>
   );
 }

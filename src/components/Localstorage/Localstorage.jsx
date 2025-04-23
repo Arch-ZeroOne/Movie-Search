@@ -14,10 +14,12 @@ const LocalStorage = () => {
 
   //* Saving sessions to localstorage
   useEffect(() => {
-    const route = [{ route: pathname }];
-    localStorage.setItem("Route", JSON.stringify(route));
-  }, [pathname]);
+    if(pathname.split("/").length === 2){
+      const route = [{ route: pathname }];
+      localStorage.setItem("Route", JSON.stringify(route));
+    }
 
+  }, [pathname]);
   return null;
 };
 
